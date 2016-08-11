@@ -19,29 +19,6 @@
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYy-3r-49w">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dke-mx-Ry9" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="highResImage" translatesAutoresizingMaskIntoConstraints="NO" id="TIC-HO-Kzk">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                            </imageView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="TIC-HO-Kzk" secondAttribute="bottom" id="HHs-km-oZI"/>
-                                            <constraint firstAttribute="trailing" secondItem="TIC-HO-Kzk" secondAttribute="trailing" id="ZVA-9a-Ipm"/>
-                                            <constraint firstItem="TIC-HO-Kzk" firstAttribute="top" secondItem="dke-mx-Ry9" secondAttribute="top" id="fhe-68-i7F"/>
-                                            <constraint firstItem="TIC-HO-Kzk" firstAttribute="leading" secondItem="dke-mx-Ry9" secondAttribute="leading" id="tFk-sE-fVu"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="dke-mx-Ry9" firstAttribute="top" secondItem="BYy-3r-49w" secondAttribute="top" id="05K-Bx-GwU"/>
-                                    <constraint firstAttribute="trailing" secondItem="dke-mx-Ry9" secondAttribute="trailing" id="ZA1-mn-JBe"/>
-                                    <constraint firstItem="dke-mx-Ry9" firstAttribute="leading" secondItem="BYy-3r-49w" secondAttribute="leading" id="dmO-4Y-Dki"/>
-                                    <constraint firstAttribute="bottom" secondItem="dke-mx-Ry9" secondAttribute="bottom" id="fC3-PB-hGi"/>
-                                </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I8j-j6-ita">
                                 <rect key="frame" x="510" y="30" width="60" height="60"/>
@@ -59,19 +36,15 @@
                         <constraints>
                             <constraint firstItem="BYy-3r-49w" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="FuF-ge-mR2"/>
                             <constraint firstAttribute="trailing" secondItem="I8j-j6-ita" secondAttribute="trailing" constant="30" id="HHx-mc-TX6"/>
-                            <constraint firstItem="dke-mx-Ry9" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="PhL-Tt-XoL"/>
                             <constraint firstItem="I8j-j6-ita" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="V6o-Lv-qVg"/>
                             <constraint firstAttribute="trailing" secondItem="BYy-3r-49w" secondAttribute="trailing" id="WYv-ea-wnO"/>
                             <constraint firstItem="BYy-3r-49w" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="azq-Mv-2qY"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="BYy-3r-49w" secondAttribute="bottom" id="q9y-2Y-5Oi"/>
-                            <constraint firstItem="dke-mx-Ry9" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="v2x-Fu-EUe"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="contentView" destination="dke-mx-Ry9" id="RJO-6c-TO2"/>
                         <outlet property="editButto" destination="I8j-j6-ita" id="Qfq-oe-jw6"/>
-                        <outlet property="imageView" destination="TIC-HO-Kzk" id="oua-gu-1gG"/>
                         <outlet property="scrollView" destination="BYy-3r-49w" id="nMn-XO-3k3"/>
                     </connections>
                 </viewController>
@@ -79,7 +52,4 @@
             </objects>
         </scene>
     </scenes>
-    <resources>
-        <image name="highResImage" width="4096" height="2160"/>
-    </resources>
 </document>

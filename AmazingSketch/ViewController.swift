@@ -12,22 +12,34 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var editButto: UIButton!
+    
+    var imageView: UIImageView!
     
     var lastPoint: CGPoint?
     var editting: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        let image = UIImage(named: "highResImage", inBundle: nil, compatibleWithTraitCollection: nil)
         
-        scrollView.minimumZoomScale = 1.0
-        scrollView.maximumZoomScale = 10.0
+        imageView = UIImageView(image: image)
+        imageView.frame = CGRect(x: 0, y: 0, width: (image?.size.width)!, height: (image?.size.height)!)
+        
+        scrollView.contentSize = CGSize(width: (image?.size.width)!, height: (image?.size.height)!)
+        
+        scrollView.addSubview(imageView)
+    
+        let scaleFactor = view.frame.width / scrollView.contentSize.width
+        
+        scrollView.minimumZoomScale = scaleFactor
+        scrollView.maximumZoomScale = 10
         scrollView.delegate = self
         scrollView.alwaysBounceVertical = false
         scrollView.alwaysBounceHorizontal = false
         
-        scrollView.contentSize = (imageView.image?.size)!
+        scrollView.zoomScale = scaleFactor
     }
     
     override func viewDidAppear(animated: Bool) {
