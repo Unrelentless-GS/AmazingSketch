@@ -31,21 +31,29 @@
                                     <action selector="editHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UWa-HJ-bvN"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Ks-Fz-z9w">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="BYy-3r-49w" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="FuF-ge-mR2"/>
                             <constraint firstAttribute="trailing" secondItem="I8j-j6-ita" secondAttribute="trailing" constant="30" id="HHx-mc-TX6"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8Ks-Fz-z9w" secondAttribute="bottom" id="LUa-7k-Idc"/>
                             <constraint firstItem="I8j-j6-ita" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="V6o-Lv-qVg"/>
                             <constraint firstAttribute="trailing" secondItem="BYy-3r-49w" secondAttribute="trailing" id="WYv-ea-wnO"/>
                             <constraint firstItem="BYy-3r-49w" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="azq-Mv-2qY"/>
+                            <constraint firstAttribute="trailing" secondItem="8Ks-Fz-z9w" secondAttribute="trailing" id="hn5-K2-cIn"/>
+                            <constraint firstItem="8Ks-Fz-z9w" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ikb-SS-VGE"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="BYy-3r-49w" secondAttribute="bottom" id="q9y-2Y-5Oi"/>
+                            <constraint firstItem="8Ks-Fz-z9w" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="vYq-vu-JL0"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="editButto" destination="I8j-j6-ita" id="Qfq-oe-jw6"/>
                         <outlet property="scrollView" destination="BYy-3r-49w" id="nMn-XO-3k3"/>
+                        <outlet property="workingImageView" destination="8Ks-Fz-z9w" id="J3J-R9-kGj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
