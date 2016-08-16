@@ -35,11 +35,4 @@ class ViewController: UIViewController {
             metrics: nil,
             views: ["amazingSketch" : amazingSketch!]))
     }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        view.layoutIfNeeded()
-        amazingSketch?.layoutIfNeeded()
-    }
 }

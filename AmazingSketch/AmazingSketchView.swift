@@ -97,7 +97,7 @@ class AmazingSketchView: UIView {
         controller?.touchesEnded(self, touches: touches, withEvent: event)
     }
     
-    override func layoutIfNeeded() {
+    override func layoutSubviews() {
         super.layoutSubviews()
         configureScrollView()
     }
