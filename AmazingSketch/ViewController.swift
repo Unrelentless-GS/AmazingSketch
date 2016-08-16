@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController, UIScrollViewDelegate {
     
@@ -87,33 +88,57 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     
     private func commitChanges() {
         
-        let scrollViewZoomScale = scrollView.zoomScale - initialZoomScale! == 0 ? 1 : scrollView.zoomScale - initialZoomScale!
+        let croppedImage = cropImage()
+        let mergedImage = merge(backImage: croppedImage, frontImage: workingImageView.image!)
+        let newImage = recreateMainImage(fromImage: mergedImage)
         
-        let size = scrollView.contentSize
-        let workingSize = workingImageView.frame.size
+        self.imageView.image = newImage
+        self.workingImageView.image = nil
+    }
+    
+    func cropImage() -> UIImage {
         
-        let offsetX = scrollView.contentOffset.x == 0 ? 1 : scrollView.contentOffset.x
-        let offsetY = scrollView.contentOffset.y == 0 ? 1 : scrollView.contentOffset.y
+        let cropRect = CGRect(
+            x: scrollView.contentOffset.x / scrollView.zoomScale * imageView.image!.scale,
+            y: scrollView.contentOffset.y / scrollView.zoomScale * imageView.image!.scale,
+            width: workingImageView.image!.size.width / scrollView.zoomScale * imageView.image!.scale,
+            height: workingImageView.image!.size.height / scrollView.zoomScale * imageView.image!.scale)
         
-        let magicMultiplierX: CGFloat = 0.704
-        let magicMultiplierY: CGFloat = 0.978
+        let cgImage = self.imageView.image!.CGImage
+        let imageRef = CGImageCreateWithImageInRect(cgImage, cropRect)
+        let image: UIImage = UIImage(CGImage: imageRef!, scale: imageView.image!.scale, orientation: imageView.image!.imageOrientation)
         
-        let scaleX = size.width / workingSize.width * magicMultiplierX
-        let scaleY = size.height / workingSize.height * magicMultiplierY
+        return image
+    }
+    
+    func merge(backImage backImage: UIImage, frontImage: UIImage) -> UIImage {
         
-        let x = offsetX
-        let y = offsetY
-        let width = workingSize.width
-        let height = workingSize.height
+        UIGraphicsBeginImageContextWithOptions(backImage.size, false, 0.0)
+        backImage.drawInRect(CGRect(origin: CGPointZero, size: backImage.size))
+        frontImage.drawInRect(CGRect(origin: CGPointZero, size: backImage.size))
         
-        UIGraphicsBeginImageContext(size)
-        self.imageView.image?.drawInRect(CGRect(x: 0, y: 0, width: size.width, height: size.height), blendMode: .Normal, alpha: 1.0)
-        self.workingImageView.image?.drawInRect(CGRect(x: x, y: y, width: width, height: height), blendMode: .Normal, alpha: 1.0)
-        self.imageView.image = UIGraphicsGetImageFromCurrentImageContext()
+        let mergedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        self.workingImageView.image = nil
+        return mergedImage
+    }
+    
+    func recreateMainImage(fromImage image: UIImage) -> UIImage {
         
+        let size = imageView.image!.size
+        let scaledSize = CGSize(width: image.size.width, height: image.size.height)
+        
+        let contentOffsetX = scrollView.contentOffset.x / scrollView.zoomScale
+        let contentOffsetY = scrollView.contentOffset.y / scrollView.zoomScale
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        imageView.image!.drawInRect(CGRect(origin: CGPointZero, size: size))
+        image.drawInRect(CGRect(origin: CGPoint(x: contentOffsetX, y: contentOffsetY), size: scaledSize))
+        
+        let mergedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return mergedImage
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
