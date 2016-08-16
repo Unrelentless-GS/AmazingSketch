@@ -31,7 +31,7 @@ class AmazingSketchView: UIView {
     }
     
     private func createViews(backgroundImage: UIImage) {
-        canvasImageView = UIImageView()
+        canvasImageView = UIImageView(image: UIImage())
         scrollView = UIScrollView()
         imageView = UIImageView(image: backgroundImage)
         
@@ -87,6 +87,7 @@ class AmazingSketchView: UIView {
         scrollView.showsHorizontalScrollIndicator = false
         
         scrollView.zoomScale = scaleFactor
+        sendSubviewToBack(scrollView)
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {

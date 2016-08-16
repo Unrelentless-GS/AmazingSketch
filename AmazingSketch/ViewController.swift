@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     var amazingSketch: AmazingSketchView?
     var controller: AmazingSketchController?
     
+    var editPic: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,5 +36,13 @@ class ViewController: UIViewController {
             options: [],
             metrics: nil,
             views: ["amazingSketch" : amazingSketch!]))
+        
+        let editButton = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(editHandler))
+        self.navigationItem.rightBarButtonItem = editButton
+    }
+    
+    func editHandler() {
+        editPic = !editPic
+        controller?.editHandler(editPic)
     }
 }

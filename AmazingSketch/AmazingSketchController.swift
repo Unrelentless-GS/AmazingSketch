@@ -43,7 +43,7 @@ class AmazingSketchController: NSObject, UIScrollViewDelegate, AmazingSketchTouc
     private func drawLineFrom(fromPoint: CGPoint, toPoint: CGPoint) {
         guard let canvas = canvasImageView else { return }
         
-        let workingSize = canvas.image!.size
+        let workingSize = canvas.frame.size
         
         UIGraphicsBeginImageContext(workingSize)
         
