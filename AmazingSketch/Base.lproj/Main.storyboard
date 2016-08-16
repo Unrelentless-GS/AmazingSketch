@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
@@ -9,52 +8,7 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AmazingSketch" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYy-3r-49w">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I8j-j6-ita">
-                                <rect key="frame" x="510" y="30" width="60" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="8oh-N6-kPH"/>
-                                    <constraint firstAttribute="width" constant="60" id="m5p-l6-943"/>
-                                </constraints>
-                                <state key="normal" title="Edit"/>
-                                <connections>
-                                    <action selector="editHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UWa-HJ-bvN"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Ks-Fz-z9w">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="BYy-3r-49w" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="FuF-ge-mR2"/>
-                            <constraint firstAttribute="trailing" secondItem="I8j-j6-ita" secondAttribute="trailing" constant="30" id="HHx-mc-TX6"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8Ks-Fz-z9w" secondAttribute="bottom" id="LUa-7k-Idc"/>
-                            <constraint firstItem="I8j-j6-ita" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="V6o-Lv-qVg"/>
-                            <constraint firstAttribute="trailing" secondItem="BYy-3r-49w" secondAttribute="trailing" id="WYv-ea-wnO"/>
-                            <constraint firstItem="BYy-3r-49w" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="azq-Mv-2qY"/>
-                            <constraint firstAttribute="trailing" secondItem="8Ks-Fz-z9w" secondAttribute="trailing" id="hn5-K2-cIn"/>
-                            <constraint firstItem="8Ks-Fz-z9w" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ikb-SS-VGE"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="BYy-3r-49w" secondAttribute="bottom" id="q9y-2Y-5Oi"/>
-                            <constraint firstItem="8Ks-Fz-z9w" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="vYq-vu-JL0"/>
-                        </constraints>
-                    </view>
                     <nil key="simulatedStatusBarMetrics"/>
-                    <connections>
-                        <outlet property="editButto" destination="I8j-j6-ita" id="Qfq-oe-jw6"/>
-                        <outlet property="scrollView" destination="BYy-3r-49w" id="nMn-XO-3k3"/>
-                        <outlet property="workingImageView" destination="8Ks-Fz-z9w" id="J3J-R9-kGj"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

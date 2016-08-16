@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		122795A11D6297A40020C828 /* AmazingSketchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122795A01D6297A40020C828 /* AmazingSketchController.swift */; };
+		122795A51D6299940020C828 /* AmazingSketchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122795A41D6299940020C828 /* AmazingSketchView.swift */; };
 		1274ECDD1D5AF4AD0078B5EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1274ECDC1D5AF4AD0078B5EF /* AppDelegate.swift */; };
 		1274ECDF1D5AF4AD0078B5EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1274ECDE1D5AF4AD0078B5EF /* ViewController.swift */; };
 		1274ECE21D5AF4AD0078B5EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1274ECE01D5AF4AD0078B5EF /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		122795A01D6297A40020C828 /* AmazingSketchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazingSketchController.swift; sourceTree = "<group>"; };
+		122795A41D6299940020C828 /* AmazingSketchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazingSketchView.swift; sourceTree = "<group>"; };
 		1274ECD91D5AF4AD0078B5EF /* AmazingSketch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AmazingSketch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1274ECDC1D5AF4AD0078B5EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1274ECDE1D5AF4AD0078B5EF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +64,8 @@
 				1274ECE31D5AF4AD0078B5EF /* Assets.xcassets */,
 				1274ECE51D5AF4AD0078B5EF /* LaunchScreen.storyboard */,
 				1274ECE81D5AF4AD0078B5EF /* Info.plist */,
+				122795A01D6297A40020C828 /* AmazingSketchController.swift */,
+				122795A41D6299940020C828 /* AmazingSketchView.swift */,
 			);
 			path = AmazingSketch;
 			sourceTree = "<group>";
@@ -137,6 +143,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1274ECDF1D5AF4AD0078B5EF /* ViewController.swift in Sources */,
+				122795A11D6297A40020C828 /* AmazingSketchController.swift in Sources */,
+				122795A51D6299940020C828 /* AmazingSketchView.swift in Sources */,
 				1274ECDD1D5AF4AD0078B5EF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,6 +307,7 @@
 				1274ECED1D5AF4AD0078B5EF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
