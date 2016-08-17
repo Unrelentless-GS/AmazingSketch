@@ -52,25 +52,32 @@ class AmazingSketchController: NSObject, UIScrollViewDelegate {
     
     func saveHandler() {
         
-        UIGraphicsBeginImageContext(backgroundImageView!.image!.size)
-        backgroundImageView!.layer.renderInContext(UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        UIImageWriteToSavedPhotosAlbum(image, self, #selector(imageWrittenCompletionHandler(_ :didFinishSavingWithError :contextInfo:)), nil)
-    }
-    
-    func imageWrittenCompletionHandler(image: UIImage, didFinishSavingWithError: NSError, contextInfo: UnsafeMutablePointer<Void>) {
-        saveCompletionHandler?()
+        let finalImage = imageWithMergedLayers()
+        UIImageWriteToSavedPhotosAlbum(finalImage, self, #selector(imageWrittenCompletionHandler(_ :didFinishSavingWithError :contextInfo:)), nil)
     }
     
     //MARK: scroll view delegate
     
     @objc internal func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
-        return self.backgroundImageView
+        return backgroundImageView
     }
     
     //MARK: PRIVATE
+    
+    @objc private func imageWrittenCompletionHandler(image: UIImage, didFinishSavingWithError: NSError, contextInfo: UnsafeMutablePointer<Void>) {
+        saveCompletionHandler?()
+    }
+    
+    private func imageWithMergedLayers() -> UIImage {
+        guard let background = backgroundImageView else { return UIImage() }
+        
+        UIGraphicsBeginImageContext(background.image!.size)
+        background.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return image
+    }
     
     private func drawLineFrom(fromPoint: CGPoint, toPoint: CGPoint) {
         guard let canvas = canvasImageView else { return }
@@ -107,7 +114,7 @@ class AmazingSketchController: NSObject, UIScrollViewDelegate {
         guard let canvas = canvasImageView else { return }
         guard let background = backgroundImageView else { return }
         guard let scrollView = scrollView else { return }
-
+        
         let scaledRect = CGRect(
             x: scrollView.contentOffset.x / scrollView.zoomScale,
             y: scrollView.contentOffset.y / scrollView.zoomScale,
