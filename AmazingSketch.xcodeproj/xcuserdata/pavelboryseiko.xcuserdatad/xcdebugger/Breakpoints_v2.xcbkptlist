@@ -24,12 +24,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AmazingSketch/AmazingSketchController.swift"
-            timestampString = "493009560.602016"
+            timestampString = "493102612.967674"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "drawLineFrom(_:toPoint:)"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "createCALayerFromWorkingImage()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

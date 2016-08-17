@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         controller = AmazingSketchController()
-        amazingSketch = AmazingSketchView(backgroundImage: UIImage(named: "highResImage")!, controller: controller!)
+        amazingSketch = AmazingSketchView(backgroundImage: UIImage(named: "mountains")!, controller: controller!)
         amazingSketch!.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(amazingSketch!)

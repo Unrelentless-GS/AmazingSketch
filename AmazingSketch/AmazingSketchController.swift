@@ -66,50 +66,28 @@ class AmazingSketchController: NSObject, UIScrollViewDelegate, AmazingSketchTouc
     
     private func commitChanges() {
         guard let canvas = canvasImageView else { return }
-        guard let background = backgroundImageView else { return }
         
-        scaleWorkingImage()
-        
-        let newImage = recreateMainImage(fromImage: canvas.image!)
-        
-        background.image = newImage
+        createCALayerFromWorkingImage()
         canvas.image = nil
     }
     
-    private func scaleWorkingImage() {
+    private func createCALayerFromWorkingImage() {
         guard let canvas = canvasImageView else { return }
+        guard let background = backgroundImageView else { return }
         guard let scrollView = scrollView else { return }
-        
+
         let scaledRect = CGRect(
-            x: 0,
-            y: 0,
-            width: canvas.image!.size.width / scrollView.zoomScale,
-            height: canvas.image!.size.height / scrollView.zoomScale)
+            x: scrollView.contentOffset.x / scrollView.zoomScale,
+            y: scrollView.contentOffset.y / scrollView.zoomScale,
+            width: canvas.frame.size.width / scrollView.zoomScale,
+            height: canvas.frame.size.height / scrollView.zoomScale)
         
-        UIGraphicsBeginImageContextWithOptions(scaledRect.size, false, 0.0)
-        canvas.image!.drawInRect(scaledRect)
-        canvas.image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-    }
-    
-    private func recreateMainImage(fromImage image: UIImage) -> UIImage {
-        guard let background = backgroundImageView else { return UIImage() }
-        guard let scrollView = scrollView else { return UIImage() }
+        let layer = CALayer()
         
-        let size = background.image!.size
-        let scaledSize = CGSize(width: image.size.width, height: image.size.height)
+        layer.frame = scaledRect
+        layer.contents = canvas.image?.CGImage
         
-        let contentOffsetX = scrollView.contentOffset.x / scrollView.zoomScale
-        let contentOffsetY = scrollView.contentOffset.y / scrollView.zoomScale
-        
-        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
-        background.image!.drawInRect(CGRect(origin: CGPointZero, size: size))
-        image.drawInRect(CGRect(origin: CGPoint(x: contentOffsetX, y: contentOffsetY), size: scaledSize))
-        
-        let mergedImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return mergedImage
+        background.layer.addSublayer(layer)
     }
     
     internal func touchesMoved(view: UIView, touches: Set<UITouch>, withEvent event: UIEvent?) {
