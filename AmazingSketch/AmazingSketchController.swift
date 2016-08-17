@@ -6,15 +6,11 @@
 //  Copyright © 2016 Pavel Boryseiko. All rights reserved.
 //
 
+typealias AmazingSketchSaveCompletionHandler = () -> ()
+
 import UIKit
 
-protocol AmazingSketchTouchable {
-    func touchesMoved(view: UIView, touches: Set<UITouch>, withEvent event: UIEvent?)
-    func touchesEnded(view: UIView, touches: Set<UITouch>, withEvent event: UIEvent?)
-    func editHandler(edit: Bool)
-}
-
-class AmazingSketchController: NSObject, UIScrollViewDelegate, AmazingSketchTouchable {
+class AmazingSketchController: NSObject, UIScrollViewDelegate {
     
     private weak var backgroundImageView: UIImageView? {
         guard let amazingSketchView = self.amazingSketchView else { return nil }
@@ -32,13 +28,49 @@ class AmazingSketchController: NSObject, UIScrollViewDelegate, AmazingSketchTouc
     }
     
     weak var amazingSketchView: AmazingSketchView?
+    var saveCompletionHandler: AmazingSketchSaveCompletionHandler?
     
     private var lastPoint: CGPoint?
     private var editing: Bool = false
     
+    convenience init(imageSavedCompletionHandler: AmazingSketchSaveCompletionHandler) {
+        self.init()
+        saveCompletionHandler = imageSavedCompletionHandler
+    }
+    
+    //MARK: PUBLIC
+    
+    func editHandler(edit: Bool) {
+        editing = edit
+        
+        guard let scrollView = scrollView else { return }
+        
+        scrollView.userInteractionEnabled = !editing
+        
+        if !editing { commitChanges() }
+    }
+    
+    func saveHandler() {
+        
+        UIGraphicsBeginImageContext(backgroundImageView!.image!.size)
+        backgroundImageView!.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(imageWrittenCompletionHandler(_ :didFinishSavingWithError :contextInfo:)), nil)
+    }
+    
+    func imageWrittenCompletionHandler(image: UIImage, didFinishSavingWithError: NSError, contextInfo: UnsafeMutablePointer<Void>) {
+        saveCompletionHandler?()
+    }
+    
+    //MARK: scroll view delegate
+    
     @objc internal func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
         return self.backgroundImageView
     }
+    
+    //MARK: PRIVATE
     
     private func drawLineFrom(fromPoint: CGPoint, toPoint: CGPoint) {
         guard let canvas = canvasImageView else { return }
@@ -90,6 +122,9 @@ class AmazingSketchController: NSObject, UIScrollViewDelegate, AmazingSketchTouc
         background.layer.addSublayer(layer)
     }
     
+    
+    //MARK: UIView touches overrides
+    
     internal func touchesMoved(view: UIView, touches: Set<UITouch>, withEvent event: UIEvent?) {
         if let touch = touches.first {
             let currentPoint = touch.locationInView(view)
@@ -104,17 +139,5 @@ class AmazingSketchController: NSObject, UIScrollViewDelegate, AmazingSketchTouc
     
     internal func touchesEnded(view: UIView, touches: Set<UITouch>, withEvent event: UIEvent?) {
         lastPoint = nil
-    }
-    
-    func editHandler(edit: Bool) {
-        editing = edit
-        
-        guard let scrollView = scrollView else { return }
-        
-        scrollView.userInteractionEnabled = !editing
-        
-        if !editing {
-            commitChanges()
-        }
     }
 }

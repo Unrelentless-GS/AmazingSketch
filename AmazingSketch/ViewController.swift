@@ -19,7 +19,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        controller = AmazingSketchController()
+        controller = AmazingSketchController(imageSavedCompletionHandler: {
+            print("image saved")
+            self.navigationItem.rightBarButtonItems![0].enabled = true
+        })
         amazingSketch = AmazingSketchView(backgroundImage: UIImage(named: "mountains")!, controller: controller!)
         amazingSketch!.translatesAutoresizingMaskIntoConstraints = false
         
@@ -38,11 +41,18 @@ class ViewController: UIViewController {
             views: ["amazingSketch" : amazingSketch!]))
         
         let editButton = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(editHandler))
-        self.navigationItem.rightBarButtonItem = editButton
+        let saveButton = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: #selector(saveHandler))
+        
+        self.navigationItem.rightBarButtonItems = [saveButton, editButton]
     }
     
     func editHandler() {
         editPic = !editPic
         controller?.editHandler(editPic)
+    }
+    
+    func saveHandler() {
+        navigationItem.rightBarButtonItems![0].enabled = false
+        controller?.saveHandler()
     }
 }
