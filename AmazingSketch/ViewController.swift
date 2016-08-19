@@ -12,22 +12,40 @@ import AVFoundation
 class ViewController: UIViewController {
     
     var amazingSketch: AmazingSketchView?
-    var controller: AmazingSketchController?
+    var drawingController: AmazingSketchDrawingController?
+    var stickerController: AmazingSketchStickerController?
     
     var editPic: Bool = false
+    var editSticker: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        controller = AmazingSketchController(imageSavedCompletionHandler: {
+        drawingController = AmazingSketchDrawingController(imageSavedCompletionHandler: {
             print("image saved")
             self.navigationItem.rightBarButtonItems![0].enabled = true
         })
-        amazingSketch = AmazingSketchView(backgroundImage: UIImage(named: "mountains")!, controller: controller!)
+        
+        stickerController = AmazingSketchStickerController(presentationViewController: self)
+        
+        amazingSketch = AmazingSketchView(
+            backgroundImage: UIImage(named: "mountains")!,
+            drawingController: drawingController!,
+            stickerController: stickerController)
+        
         amazingSketch!.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(amazingSketch!)
+        addConstraints()
         
+        let editButton = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(editHandler))
+        let stickerButton = UIBarButtonItem(barButtonSystemItem: .Organize, target: self, action: #selector(stickerHandler))
+        let saveButton = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: #selector(saveHandler))
+        
+        self.navigationItem.rightBarButtonItems = [saveButton, editButton, stickerButton]
+    }
+    
+    private func addConstraints() {
         NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
             "H:|[amazingSketch]|",
             options: [],
@@ -39,20 +57,20 @@ class ViewController: UIViewController {
             options: [],
             metrics: nil,
             views: ["amazingSketch" : amazingSketch!]))
-        
-        let editButton = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(editHandler))
-        let saveButton = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: #selector(saveHandler))
-        
-        self.navigationItem.rightBarButtonItems = [saveButton, editButton]
+    }
+    
+    func stickerHandler() {
+        editSticker = !editSticker
+        stickerController?.stickerHandler(editSticker)
     }
     
     func editHandler() {
         editPic = !editPic
-        controller?.editHandler(editPic)
+        drawingController?.editHandler(editPic)
     }
     
     func saveHandler() {
         navigationItem.rightBarButtonItems![0].enabled = false
-        controller?.saveHandler()
+        drawingController?.saveHandler()
     }
 }

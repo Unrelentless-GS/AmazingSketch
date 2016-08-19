@@ -10,19 +10,19 @@ typealias AmazingSketchSaveCompletionHandler = () -> ()
 
 import UIKit
 
-class AmazingSketchController: NSObject, UIScrollViewDelegate {
+class AmazingSketchDrawingController: NSObject, UIScrollViewDelegate {
     
     private weak var backgroundImageView: UIImageView? {
         guard let amazingSketchView = self.amazingSketchView else { return nil }
         return amazingSketchView.imageView
     }
     
-    private weak var canvasImageView: UIImageView? {
+    private weak var canvasImageView: AmazingSketchDrawingCanvas? {
         guard let amazingSketchView = self.amazingSketchView else { return nil }
         return amazingSketchView.canvasImageView
     }
     
-    private weak var scrollView: UIScrollView? {
+    private weak var scrollView: AmazingSketchScrollView? {
         guard let amazingSketchView = self.amazingSketchView else { return nil }
         return amazingSketchView.scrollView
     }
@@ -43,9 +43,8 @@ class AmazingSketchController: NSObject, UIScrollViewDelegate {
     func editHandler(edit: Bool) {
         editing = edit
         
-        guard let scrollView = scrollView else { return }
-        
-        scrollView.userInteractionEnabled = !editing
+        scrollView?.userInteractionEnabled = !editing
+        canvasImageView?.userInteractionEnabled = editing
         
         if !editing { commitChanges() }
     }
@@ -61,7 +60,7 @@ class AmazingSketchController: NSObject, UIScrollViewDelegate {
     @objc internal func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
         return backgroundImageView
     }
-    
+        
     //MARK: PRIVATE
     
     @objc private func imageWrittenCompletionHandler(image: UIImage, didFinishSavingWithError: NSError, contextInfo: UnsafeMutablePointer<Void>) {
