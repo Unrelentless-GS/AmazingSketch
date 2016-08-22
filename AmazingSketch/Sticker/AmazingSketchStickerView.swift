@@ -93,7 +93,7 @@ class AmazingSketchStickerView: UIImageView {
         }
     }
     
-    @objc func handleRotate(recognizer : UIRotationGestureRecognizer) {
+    @objc private func handleRotate(recognizer : UIRotationGestureRecognizer) {
         if let view = recognizer.view {
             view.transform = CGAffineTransformRotate(view.transform, recognizer.rotation)
             recognizer.rotation = 0

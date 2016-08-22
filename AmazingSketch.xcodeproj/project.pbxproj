@@ -7,21 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		122795A11D6297A40020C828 /* AmazingSketchDrawingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122795A01D6297A40020C828 /* AmazingSketchDrawingController.swift */; };
+		121FDE101D6AE43700694064 /* AmazingSketchDrawingCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121FDE0B1D6AE43700694064 /* AmazingSketchDrawingCanvas.swift */; };
+		121FDE111D6AE43700694064 /* AmazingSketchDrawingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121FDE0C1D6AE43700694064 /* AmazingSketchDrawingController.swift */; };
+		121FDE121D6AE43700694064 /* AmazingSketchStickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121FDE0E1D6AE43700694064 /* AmazingSketchStickerController.swift */; };
+		121FDE131D6AE43700694064 /* AmazingSketchStickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121FDE0F1D6AE43700694064 /* AmazingSketchStickerView.swift */; };
 		122795A51D6299940020C828 /* AmazingSketchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122795A41D6299940020C828 /* AmazingSketchView.swift */; };
 		1274ECDD1D5AF4AD0078B5EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1274ECDC1D5AF4AD0078B5EF /* AppDelegate.swift */; };
 		1274ECDF1D5AF4AD0078B5EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1274ECDE1D5AF4AD0078B5EF /* ViewController.swift */; };
 		1274ECE21D5AF4AD0078B5EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1274ECE01D5AF4AD0078B5EF /* Main.storyboard */; };
 		1274ECE41D5AF4AD0078B5EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1274ECE31D5AF4AD0078B5EF /* Assets.xcassets */; };
 		1274ECE71D5AF4AD0078B5EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1274ECE51D5AF4AD0078B5EF /* LaunchScreen.storyboard */; };
-		12A9F0961D6562F7001E084D /* AmazingSketchStickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A9F0951D6562F7001E084D /* AmazingSketchStickerController.swift */; };
-		12A9F0981D668C6F001E084D /* AmazingSketchStickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A9F0971D668C6F001E084D /* AmazingSketchStickerView.swift */; };
-		12A9F09A1D66911B001E084D /* AmazingSketchDrawingCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A9F0991D66911B001E084D /* AmazingSketchDrawingCanvas.swift */; };
 		12A9F09C1D669519001E084D /* AmazingSketchScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A9F09B1D669519001E084D /* AmazingSketchScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		122795A01D6297A40020C828 /* AmazingSketchDrawingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazingSketchDrawingController.swift; sourceTree = "<group>"; };
+		121FDE0B1D6AE43700694064 /* AmazingSketchDrawingCanvas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazingSketchDrawingCanvas.swift; sourceTree = "<group>"; };
+		121FDE0C1D6AE43700694064 /* AmazingSketchDrawingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazingSketchDrawingController.swift; sourceTree = "<group>"; };
+		121FDE0E1D6AE43700694064 /* AmazingSketchStickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazingSketchStickerController.swift; sourceTree = "<group>"; };
+		121FDE0F1D6AE43700694064 /* AmazingSketchStickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazingSketchStickerView.swift; sourceTree = "<group>"; };
 		122795A41D6299940020C828 /* AmazingSketchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazingSketchView.swift; sourceTree = "<group>"; };
 		1274ECD91D5AF4AD0078B5EF /* AmazingSketch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AmazingSketch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1274ECDC1D5AF4AD0078B5EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -30,9 +33,6 @@
 		1274ECE31D5AF4AD0078B5EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1274ECE61D5AF4AD0078B5EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1274ECE81D5AF4AD0078B5EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		12A9F0951D6562F7001E084D /* AmazingSketchStickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazingSketchStickerController.swift; sourceTree = "<group>"; };
-		12A9F0971D668C6F001E084D /* AmazingSketchStickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazingSketchStickerView.swift; sourceTree = "<group>"; };
-		12A9F0991D66911B001E084D /* AmazingSketchDrawingCanvas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazingSketchDrawingCanvas.swift; sourceTree = "<group>"; };
 		12A9F09B1D669519001E084D /* AmazingSketchScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazingSketchScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -47,6 +47,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		121FDE0A1D6AE43700694064 /* Drawing */ = {
+			isa = PBXGroup;
+			children = (
+				121FDE0B1D6AE43700694064 /* AmazingSketchDrawingCanvas.swift */,
+				121FDE0C1D6AE43700694064 /* AmazingSketchDrawingController.swift */,
+			);
+			path = Drawing;
+			sourceTree = "<group>";
+		};
+		121FDE0D1D6AE43700694064 /* Sticker */ = {
+			isa = PBXGroup;
+			children = (
+				121FDE0E1D6AE43700694064 /* AmazingSketchStickerController.swift */,
+				121FDE0F1D6AE43700694064 /* AmazingSketchStickerView.swift */,
+			);
+			path = Sticker;
+			sourceTree = "<group>";
+		};
 		1274ECD01D5AF4AD0078B5EF = {
 			isa = PBXGroup;
 			children = (
@@ -66,18 +84,16 @@
 		1274ECDB1D5AF4AD0078B5EF /* AmazingSketch */ = {
 			isa = PBXGroup;
 			children = (
+				122795A41D6299940020C828 /* AmazingSketchView.swift */,
+				12A9F09B1D669519001E084D /* AmazingSketchScrollView.swift */,
+				121FDE0A1D6AE43700694064 /* Drawing */,
+				121FDE0D1D6AE43700694064 /* Sticker */,
 				1274ECDC1D5AF4AD0078B5EF /* AppDelegate.swift */,
 				1274ECDE1D5AF4AD0078B5EF /* ViewController.swift */,
-				1274ECE01D5AF4AD0078B5EF /* Main.storyboard */,
 				1274ECE31D5AF4AD0078B5EF /* Assets.xcassets */,
 				1274ECE51D5AF4AD0078B5EF /* LaunchScreen.storyboard */,
+				1274ECE01D5AF4AD0078B5EF /* Main.storyboard */,
 				1274ECE81D5AF4AD0078B5EF /* Info.plist */,
-				122795A01D6297A40020C828 /* AmazingSketchDrawingController.swift */,
-				12A9F0951D6562F7001E084D /* AmazingSketchStickerController.swift */,
-				122795A41D6299940020C828 /* AmazingSketchView.swift */,
-				12A9F0971D668C6F001E084D /* AmazingSketchStickerView.swift */,
-				12A9F0991D66911B001E084D /* AmazingSketchDrawingCanvas.swift */,
-				12A9F09B1D669519001E084D /* AmazingSketchScrollView.swift */,
 			);
 			path = AmazingSketch;
 			sourceTree = "<group>";
@@ -154,13 +170,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				121FDE111D6AE43700694064 /* AmazingSketchDrawingController.swift in Sources */,
 				1274ECDF1D5AF4AD0078B5EF /* ViewController.swift in Sources */,
-				122795A11D6297A40020C828 /* AmazingSketchDrawingController.swift in Sources */,
-				12A9F0961D6562F7001E084D /* AmazingSketchStickerController.swift in Sources */,
+				121FDE131D6AE43700694064 /* AmazingSketchStickerView.swift in Sources */,
 				12A9F09C1D669519001E084D /* AmazingSketchScrollView.swift in Sources */,
-				12A9F0981D668C6F001E084D /* AmazingSketchStickerView.swift in Sources */,
-				12A9F09A1D66911B001E084D /* AmazingSketchDrawingCanvas.swift in Sources */,
+				121FDE121D6AE43700694064 /* AmazingSketchStickerController.swift in Sources */,
 				122795A51D6299940020C828 /* AmazingSketchView.swift in Sources */,
+				121FDE101D6AE43700694064 /* AmazingSketchDrawingCanvas.swift in Sources */,
 				1274ECDD1D5AF4AD0078B5EF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
