@@ -21,11 +21,6 @@ class AmazingSketchScrollView: UIScrollView, UIGestureRecognizerDelegate {
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        
-        print("\n", gestureRecognizer)
-        print("\n", otherGestureRecognizer)
-        print("\n****************************")
-        
         return true
     }
 }

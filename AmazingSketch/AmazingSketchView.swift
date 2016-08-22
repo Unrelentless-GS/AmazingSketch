@@ -85,12 +85,12 @@ class AmazingSketchView: UIView {
         
         imageView.frame = CGRect(x: 0, y: 0, width: imageView.image!.size.width, height: imageView.image!.size.height)
         scrollView.contentSize = CGSize(width: imageView.image!.size.width, height: imageView.image!.size.height)
-        
-        print("\n***********BEFORE*********")
-        print("\ncurrent frame \(frame)")
-        print("\nscrollView content size: \(scrollView.contentSize)")
-        print("\nscrollView zoom scale: \(scrollView.zoomScale)")
-        print("\nimageView image \(imageView.image!)")
+//        
+//        print("\n***********BEFORE*********")
+//        print("\ncurrent frame \(frame)")
+//        print("\nscrollView content size: \(scrollView.contentSize)")
+//        print("\nscrollView zoom scale: \(scrollView.zoomScale)")
+//        print("\nimageView image \(imageView.image!)")
         
         let scaleFactor = (frame.height / scrollView.contentSize.height) < (frame.width / scrollView.contentSize.width)
             ? (frame.width / scrollView.contentSize.width)
@@ -106,11 +106,11 @@ class AmazingSketchView: UIView {
         scrollView.zoomScale = scaleFactor
         sendSubviewToBack(scrollView)
         
-        print("\n***********AFTER*************")
-        print("\ncurrent frame \(frame)")
-        print("\nscrollView content size: \(scrollView.contentSize)")
-        print("\nscrollView zoom scale: \(scrollView.zoomScale)")
-        print("\nimageView image \(imageView.image!)")
+//        print("\n***********AFTER*************")
+//        print("\ncurrent frame \(frame)")
+//        print("\nscrollView content size: \(scrollView.contentSize)")
+//        print("\nscrollView zoom scale: \(scrollView.zoomScale)")
+//        print("\nimageView image \(imageView.image!)")
         
         guard let drawingController = drawingController else { return }
         

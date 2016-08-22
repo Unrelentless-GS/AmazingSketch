@@ -71,8 +71,7 @@ class AmazingSketchStickerView: UIImageView {
             finalPoint.x = min(max(finalPoint.x, self.frame.width / 2), self.superview!.bounds.size.width - self.frame.width / 2)
             finalPoint.y = min(max(finalPoint.y, self.frame.height / 2), self.superview!.bounds.size.height - self.frame.height / 2)
             
-            print("final point \n", finalPoint)
-            UIView.animateWithDuration(Double(slideFactor * 2),
+            UIView.animateWithDuration(Double(slideFactor),
                                        delay: 0,
                                        options: UIViewAnimationOptions.CurveEaseOut,
                                        animations: { recognizer.view!.center = finalPoint },
@@ -81,9 +80,15 @@ class AmazingSketchStickerView: UIImageView {
     }
     
     @objc func handlePinch(recognizer : UIPinchGestureRecognizer) {
+        let scale = (x: superview!.transform.a, y: superview!.transform.d)
+        let scaledSize = CGSize(width: self.frame.width * scale.x, height: self.frame.height * scale.y)
+
+        if scaledSize > self.superview?.frame.size && recognizer.scale > 1.0 { return }
+
         if let view = recognizer.view {
             view.transform = CGAffineTransformScale(view.transform,
-                                                    recognizer.scale, recognizer.scale)
+                                                    recognizer.scale,
+                                                    recognizer.scale)
             recognizer.scale = 1
         }
     }
@@ -98,4 +103,14 @@ class AmazingSketchStickerView: UIImageView {
     @objc func handleFocus(recogniser: UITapGestureRecognizer) {
         superview?.bringSubviewToFront(self)
     }
+}
+
+extension CGSize: Comparable { }
+
+public func < (lhs: CGSize, rhs: CGSize) -> Bool {
+    return (lhs.height < rhs.height) && (lhs.width < rhs.width)
+}
+
+public func > (lhs: CGSize, rhs: CGSize) -> Bool {
+    return (lhs.height > rhs.height) || (lhs.width > rhs.width)
 }
