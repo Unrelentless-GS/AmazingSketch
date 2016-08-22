@@ -10,6 +10,7 @@ import UIKit
 
 class AmazingSketchStickerView: UIImageView {
     
+    var focusGesture: UITapGestureRecognizer?
     var panGesture: UIPanGestureRecognizer?
     var pinchGesture: UIPinchGestureRecognizer?
     var rotateGesture: UIRotationGestureRecognizer?
@@ -23,6 +24,7 @@ class AmazingSketchStickerView: UIImageView {
         self.init(image: image)
         self.gestureDelegate = gestureRecogniserDelegate
         
+        focusGesture!.delegate = gestureDelegate
         panGesture!.delegate = gestureDelegate
         pinchGesture!.delegate = gestureDelegate
         rotateGesture!.delegate = gestureDelegate
@@ -41,11 +43,14 @@ class AmazingSketchStickerView: UIImageView {
     private func setupGesture() {
         self.userInteractionEnabled = true
         
+        focusGesture = UITapGestureRecognizer(target: self, action: #selector(handleFocus(_:)))
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
         rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(handleRotate(_:)))
         
-        self.gestureRecognizers = [panGesture!, pinchGesture!, rotateGesture!]
+        self.focusGesture?.numberOfTapsRequired = 2
+
+        self.gestureRecognizers = [panGesture!, pinchGesture!, rotateGesture!, focusGesture!]
     }
     
     @objc private func handlePan(recognizer: UIPanGestureRecognizer) {
@@ -88,5 +93,9 @@ class AmazingSketchStickerView: UIImageView {
             view.transform = CGAffineTransformRotate(view.transform, recognizer.rotation)
             recognizer.rotation = 0
         }
+    }
+    
+    @objc func handleFocus(recogniser: UITapGestureRecognizer) {
+        superview?.bringSubviewToFront(self)
     }
 }

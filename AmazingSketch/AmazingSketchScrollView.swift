@@ -15,7 +15,7 @@ class AmazingSketchScrollView: UIScrollView, UIGestureRecognizerDelegate {
     init() {
         super.init(frame: CGRectZero)
         self.canCancelContentTouches = false
-        self.delaysContentTouches = false
+//        self.delaysContentTouches = false
     }
     
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
