@@ -22,7 +22,7 @@ class AmazingSketchStickerView: UIImageView {
     
     convenience init(image: UIImage, gestureRecogniserDelegate: UIGestureRecognizerDelegate?) {
         self.init(image: image)
-        self.gestureDelegate = gestureRecogniserDelegate
+        gestureDelegate = gestureRecogniserDelegate
         
         focusGesture!.delegate = gestureDelegate
         panGesture!.delegate = gestureDelegate
@@ -41,35 +41,35 @@ class AmazingSketchStickerView: UIImageView {
     }
     
     private func setupGesture() {
-        self.userInteractionEnabled = true
+        userInteractionEnabled = true
         
         focusGesture = UITapGestureRecognizer(target: self, action: #selector(handleFocus(_:)))
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
         rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(handleRotate(_:)))
         
-        self.focusGesture?.numberOfTapsRequired = 2
-
-        self.gestureRecognizers = [panGesture!, pinchGesture!, rotateGesture!, focusGesture!]
+        focusGesture?.numberOfTapsRequired = 2
+        
+        gestureRecognizers = [panGesture!, pinchGesture!, rotateGesture!, focusGesture!]
     }
     
     @objc private func handlePan(recognizer: UIPanGestureRecognizer) {
-        let translation = recognizer.translationInView(self.superview)
+        let translation = recognizer.translationInView(superview)
         if let view = recognizer.view {
             view.center = CGPoint(x:view.center.x + translation.x,
                                   y:view.center.y + translation.y)
         }
-        recognizer.setTranslation(CGPointZero, inView: self.superview)
+        recognizer.setTranslation(CGPointZero, inView: superview)
         
         if recognizer.state == UIGestureRecognizerState.Ended {
-            let velocity = recognizer.velocityInView(self.superview)
+            let velocity = recognizer.velocityInView(superview)
             let magnitude = sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y))
             let slideMultiplier = magnitude / 200
             let slideFactor = 0.005 * slideMultiplier     //Increase for more of a slide
             var finalPoint = CGPoint(x:recognizer.view!.center.x + (velocity.x * slideFactor),
                                      y:recognizer.view!.center.y + (velocity.y * slideFactor))
-            finalPoint.x = min(max(finalPoint.x, self.frame.width / 2), self.superview!.bounds.size.width - self.frame.width / 2)
-            finalPoint.y = min(max(finalPoint.y, self.frame.height / 2), self.superview!.bounds.size.height - self.frame.height / 2)
+            finalPoint.x = min(max(finalPoint.x, frame.width / 2), superview!.bounds.size.width - frame.width / 2)
+            finalPoint.y = min(max(finalPoint.y, frame.height / 2), superview!.bounds.size.height - frame.height / 2)
             
             UIView.animateWithDuration(Double(slideFactor),
                                        delay: 0,
@@ -81,10 +81,10 @@ class AmazingSketchStickerView: UIImageView {
     
     @objc func handlePinch(recognizer : UIPinchGestureRecognizer) {
         let scale = (x: superview!.transform.a, y: superview!.transform.d)
-        let scaledSize = CGSize(width: self.frame.width * scale.x, height: self.frame.height * scale.y)
-
-        if scaledSize > self.superview?.frame.size && recognizer.scale > 1.0 { return }
-
+        let scaledSize = CGSize(width: frame.width * scale.x, height: frame.height * scale.y)
+        
+        if scaledSize > superview?.frame.size && recognizer.scale > 1.0 { return }
+        
         if let view = recognizer.view {
             view.transform = CGAffineTransformScale(view.transform,
                                                     recognizer.scale,

@@ -10,7 +10,7 @@ import UIKit
 
 class AmazingSketchView: UIView {
     
-    var canvasImageView: AmazingSketchDrawingCanvas!
+    var canvasImageView: AmazingSketchDrawingView!
     var scrollView: AmazingSketchScrollView!
     var imageView: UIImageView!
     
@@ -39,7 +39,7 @@ class AmazingSketchView: UIView {
     }
     
     private func createViews(backgroundImage: UIImage) {
-        canvasImageView = AmazingSketchDrawingCanvas(controller: drawingController)
+        canvasImageView = AmazingSketchDrawingView(controller: drawingController)
         scrollView = AmazingSketchScrollView()
         imageView = UIImageView(image: backgroundImage)
         

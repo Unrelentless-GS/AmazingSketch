@@ -8,8 +8,8 @@
 
 import UIKit
 
-class AmazingSketchDrawingCanvas: UIImageView {
-
+class AmazingSketchDrawingView: UIImageView {
+        
     private weak var controller: AmazingSketchDrawingController?
     
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }

@@ -21,10 +21,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        drawingController = AmazingSketchDrawingController(imageSavedCompletionHandler: {
+        drawingController = AmazingSketchDrawingController(imageSavedCompletionHandler: { [unowned self] in
             print("image saved")
             self.navigationItem.rightBarButtonItems![0].enabled = true
         })
+        drawingController?.lineColour = UIColor.purpleColor()
         
         stickerController = AmazingSketchStickerController(presentationViewController: self)
         
@@ -39,7 +40,7 @@ class ViewController: UIViewController {
         addConstraints()
         
         let editButton = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(editHandler))
-        let stickerButton = UIBarButtonItem(barButtonSystemItem: .Organize, target: self, action: #selector(stickerHandler))
+        let stickerButton = UIBarButtonItem(barButtonSystemItem: .Redo, target: self, action: #selector(stickerHandler))
         let saveButton = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: #selector(saveHandler))
         
         self.navigationItem.rightBarButtonItems = [saveButton, editButton, stickerButton]

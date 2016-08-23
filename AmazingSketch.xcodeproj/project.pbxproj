@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		121FDE101D6AE43700694064 /* AmazingSketchDrawingCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121FDE0B1D6AE43700694064 /* AmazingSketchDrawingCanvas.swift */; };
+		120957341D6BDD8600BC67A3 /* AmazingSketchExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120957331D6BDD8600BC67A3 /* AmazingSketchExtensions.swift */; };
+		121FDE101D6AE43700694064 /* AmazingSketchDrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121FDE0B1D6AE43700694064 /* AmazingSketchDrawingView.swift */; };
 		121FDE111D6AE43700694064 /* AmazingSketchDrawingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121FDE0C1D6AE43700694064 /* AmazingSketchDrawingController.swift */; };
 		121FDE121D6AE43700694064 /* AmazingSketchStickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121FDE0E1D6AE43700694064 /* AmazingSketchStickerController.swift */; };
 		121FDE131D6AE43700694064 /* AmazingSketchStickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121FDE0F1D6AE43700694064 /* AmazingSketchStickerView.swift */; };
@@ -21,7 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		121FDE0B1D6AE43700694064 /* AmazingSketchDrawingCanvas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazingSketchDrawingCanvas.swift; sourceTree = "<group>"; };
+		120957331D6BDD8600BC67A3 /* AmazingSketchExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazingSketchExtensions.swift; sourceTree = "<group>"; };
+		121FDE0B1D6AE43700694064 /* AmazingSketchDrawingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazingSketchDrawingView.swift; sourceTree = "<group>"; };
 		121FDE0C1D6AE43700694064 /* AmazingSketchDrawingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazingSketchDrawingController.swift; sourceTree = "<group>"; };
 		121FDE0E1D6AE43700694064 /* AmazingSketchStickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazingSketchStickerController.swift; sourceTree = "<group>"; };
 		121FDE0F1D6AE43700694064 /* AmazingSketchStickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazingSketchStickerView.swift; sourceTree = "<group>"; };
@@ -50,7 +52,7 @@
 		121FDE0A1D6AE43700694064 /* Drawing */ = {
 			isa = PBXGroup;
 			children = (
-				121FDE0B1D6AE43700694064 /* AmazingSketchDrawingCanvas.swift */,
+				121FDE0B1D6AE43700694064 /* AmazingSketchDrawingView.swift */,
 				121FDE0C1D6AE43700694064 /* AmazingSketchDrawingController.swift */,
 			);
 			path = Drawing;
@@ -86,6 +88,7 @@
 			children = (
 				122795A41D6299940020C828 /* AmazingSketchView.swift */,
 				12A9F09B1D669519001E084D /* AmazingSketchScrollView.swift */,
+				120957331D6BDD8600BC67A3 /* AmazingSketchExtensions.swift */,
 				121FDE0A1D6AE43700694064 /* Drawing */,
 				121FDE0D1D6AE43700694064 /* Sticker */,
 				1274ECDC1D5AF4AD0078B5EF /* AppDelegate.swift */,
@@ -172,11 +175,12 @@
 			files = (
 				121FDE111D6AE43700694064 /* AmazingSketchDrawingController.swift in Sources */,
 				1274ECDF1D5AF4AD0078B5EF /* ViewController.swift in Sources */,
+				120957341D6BDD8600BC67A3 /* AmazingSketchExtensions.swift in Sources */,
 				121FDE131D6AE43700694064 /* AmazingSketchStickerView.swift in Sources */,
 				12A9F09C1D669519001E084D /* AmazingSketchScrollView.swift in Sources */,
 				121FDE121D6AE43700694064 /* AmazingSketchStickerController.swift in Sources */,
 				122795A51D6299940020C828 /* AmazingSketchView.swift in Sources */,
-				121FDE101D6AE43700694064 /* AmazingSketchDrawingCanvas.swift in Sources */,
+				121FDE101D6AE43700694064 /* AmazingSketchDrawingView.swift in Sources */,
 				1274ECDD1D5AF4AD0078B5EF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

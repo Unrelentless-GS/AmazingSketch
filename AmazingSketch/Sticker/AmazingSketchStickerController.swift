@@ -15,7 +15,7 @@ class AmazingSketchStickerController: NSObject, UINavigationControllerDelegate, 
         return amazingSketchView.imageView
     }
     
-    private weak var canvasImageView: AmazingSketchDrawingCanvas? {
+    private weak var canvasImageView: AmazingSketchDrawingView? {
         guard let amazingSketchView = self.amazingSketchView else { return nil }
         return amazingSketchView.canvasImageView
     }
@@ -96,8 +96,6 @@ class AmazingSketchStickerController: NSObject, UINavigationControllerDelegate, 
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        presentationViewController?.dismissViewControllerAnimated(true) {
-            
-        }
+        presentationViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
 }

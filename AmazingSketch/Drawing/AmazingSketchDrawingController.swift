@@ -12,12 +12,17 @@ import UIKit
 
 class AmazingSketchDrawingController: NSObject, UIScrollViewDelegate {
     
+    weak var amazingSketchView: AmazingSketchView?
+
+    var lineColour: UIColor = UIColor.whiteColor()
+    var saveCompletionHandler: AmazingSketchSaveCompletionHandler?
+
     private weak var backgroundImageView: UIImageView? {
         guard let amazingSketchView = self.amazingSketchView else { return nil }
         return amazingSketchView.imageView
     }
     
-    private weak var canvasImageView: AmazingSketchDrawingCanvas? {
+    private weak var canvasImageView: AmazingSketchDrawingView? {
         guard let amazingSketchView = self.amazingSketchView else { return nil }
         return amazingSketchView.canvasImageView
     }
@@ -26,9 +31,6 @@ class AmazingSketchDrawingController: NSObject, UIScrollViewDelegate {
         guard let amazingSketchView = self.amazingSketchView else { return nil }
         return amazingSketchView.scrollView
     }
-    
-    weak var amazingSketchView: AmazingSketchView?
-    var saveCompletionHandler: AmazingSketchSaveCompletionHandler?
     
     private var lastPoint: CGPoint?
     private var editing: Bool = false
@@ -60,7 +62,7 @@ class AmazingSketchDrawingController: NSObject, UIScrollViewDelegate {
     @objc internal func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
         return backgroundImageView
     }
-        
+    
     //MARK: PRIVATE
     
     @objc private func imageWrittenCompletionHandler(image: UIImage, didFinishSavingWithError: NSError, contextInfo: UnsafeMutablePointer<Void>) {
@@ -93,7 +95,7 @@ class AmazingSketchDrawingController: NSObject, UIScrollViewDelegate {
         
         CGContextSetLineCap(context, .Round)
         CGContextSetLineWidth(context, 2.0)
-        CGContextSetRGBStrokeColor(context, 1, 1, 1, 1)
+        CGContextSetRGBStrokeColor(context, lineColour.red, lineColour.green, lineColour.blue, lineColour.alpha)
         CGContextSetBlendMode(context, .Normal)
         
         CGContextStrokePath(context)
