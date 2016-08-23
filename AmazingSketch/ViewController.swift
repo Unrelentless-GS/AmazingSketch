@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         addConstraints()
         
         let editButton = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(editHandler))
-        let stickerButton = UIBarButtonItem(barButtonSystemItem: .Redo, target: self, action: #selector(stickerHandler))
+        let stickerButton = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: #selector(stickerHandler))
         let saveButton = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: #selector(saveHandler))
         
         self.navigationItem.rightBarButtonItems = [saveButton, editButton, stickerButton]
