@@ -7,12 +7,14 @@
 //
 
 typealias AmazingSketchSaveCompletionHandler = () -> ()
+typealias AmazingSketchMapSetHandler = (mapImage: UIImage) -> ()
 
 import UIKit
 
 class AmazingSketchDrawingController: NSObject, UIScrollViewDelegate {
     
     weak var amazingSketchView: AmazingSketchView?
+    weak var mapPresentationViewController: UIViewController?
 
     var lineColour: UIColor = UIColor.whiteColor()
     var saveCompletionHandler: AmazingSketchSaveCompletionHandler?
@@ -55,6 +57,17 @@ class AmazingSketchDrawingController: NSObject, UIScrollViewDelegate {
         
         let finalImage = imageWithMergedLayers()
         UIImageWriteToSavedPhotosAlbum(finalImage, self, #selector(imageWrittenCompletionHandler(_ :didFinishSavingWithError :contextInfo:)), nil)
+    }
+    
+    func mapPresentationHandler() {
+        let mapViewController = AmazingSketchMapViewController()
+        let navigationController = UINavigationController(rootViewController: mapViewController)
+        
+        mapViewController.setHandler = { [unowned self] image in
+            print("SET!!")
+        }
+        
+        mapPresentationViewController?.presentViewController(navigationController, animated: true, completion: nil)
     }
     
     //MARK: scroll view delegate

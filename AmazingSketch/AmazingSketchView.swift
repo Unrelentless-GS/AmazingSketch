@@ -12,7 +12,11 @@ class AmazingSketchView: UIView {
     
     var canvasImageView: AmazingSketchDrawingView!
     var scrollView: AmazingSketchScrollView!
-    var imageView: UIImageView!
+    var imageView: UIImageView! {
+        didSet {
+            configureScrollView()
+        }
+    }
     
     weak var drawingController: AmazingSketchDrawingController?
     weak var stickerController: AmazingSketchStickerController?

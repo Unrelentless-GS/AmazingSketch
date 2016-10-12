@@ -26,6 +26,7 @@ class ViewController: UIViewController {
             self.navigationItem.rightBarButtonItems![0].enabled = true
         })
         drawingController?.lineColour = UIColor.purpleColor()
+        drawingController?.mapPresentationViewController = self
         
         stickerController = AmazingSketchStickerController(presentationViewController: self)
         
@@ -42,8 +43,9 @@ class ViewController: UIViewController {
         let editButton = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(editHandler))
         let stickerButton = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: #selector(stickerHandler))
         let saveButton = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: #selector(saveHandler))
+        let mapButton = UIBarButtonItem(barButtonSystemItem: .Bookmarks, target: self, action: #selector(mapHandler))
         
-        self.navigationItem.rightBarButtonItems = [saveButton, editButton, stickerButton]
+        self.navigationItem.rightBarButtonItems = [saveButton, editButton, stickerButton, mapButton]
     }
     
     private func addConstraints() {
@@ -73,5 +75,9 @@ class ViewController: UIViewController {
     func saveHandler() {
         navigationItem.rightBarButtonItems![0].enabled = false
         drawingController?.saveHandler()
+    }
+    
+    func mapHandler() {
+        drawingController?.mapPresentationHandler()
     }
 }

@@ -26,3 +26,19 @@ extension UIColor{
         return CGColorGetComponents(self.CGColor)[3]
     }
 }
+
+extension UIView {
+    
+    func renderToImage() -> UIImage? {
+        
+        UIGraphicsBeginImageContext(self.frame.size);
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        
+        self.layer.renderInContext(context)
+        let image = UIGraphicsGetImageFromCurrentImageContext();
+        
+        UIGraphicsEndImageContext();
+        
+        return image
+    }
+}
