@@ -12,11 +12,7 @@ class AmazingSketchView: UIView {
     
     var canvasImageView: AmazingSketchDrawingView!
     var scrollView: AmazingSketchScrollView!
-    var imageView: UIImageView! {
-        didSet {
-            configureScrollView()
-        }
-    }
+    var imageView: UIImageView!
     
     weak var drawingController: AmazingSketchDrawingController?
     weak var stickerController: AmazingSketchStickerController?
@@ -40,6 +36,15 @@ class AmazingSketchView: UIView {
         
         stickerController.amazingSketchView = self
         stickerController.createGestures()        
+    }
+    
+    func updateBackgroundImage(image: UIImage) {
+        self.canvasImageView.removeFromSuperview()
+        self.scrollView.removeFromSuperview()
+        self.imageView.removeFromSuperview()
+        
+        createViews(image)
+        createConstraints(image)
     }
     
     private func createViews(backgroundImage: UIImage) {

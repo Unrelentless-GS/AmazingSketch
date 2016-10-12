@@ -64,6 +64,7 @@ class AmazingSketchDrawingController: NSObject, UIScrollViewDelegate {
         let navigationController = UINavigationController(rootViewController: mapViewController)
         
         mapViewController.setHandler = { [unowned self] image in
+            self.amazingSketchView?.updateBackgroundImage(image)
             print("SET!!")
         }
         
