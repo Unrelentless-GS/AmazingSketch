@@ -42,3 +42,16 @@ extension UIView {
         return image
     }
 }
+
+extension UIImage {
+    func scaleToSize(size: CGSize) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        
+        UIGraphicsBeginImageContext(size)
+        self.drawInRect(rect)
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return scaledImage
+    }
+}

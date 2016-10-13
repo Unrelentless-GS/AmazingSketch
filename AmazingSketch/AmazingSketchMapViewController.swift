@@ -76,10 +76,10 @@ class AmazingSketchMapViewController: UIViewController, MKMapViewDelegate, CLLoc
     
     //MARK: CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("hello")
+
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print("byebye")
+
     }
 }

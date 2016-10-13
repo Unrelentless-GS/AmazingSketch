@@ -14,7 +14,7 @@ import UIKit
 class AmazingSketchDrawingController: NSObject, UIScrollViewDelegate {
     
     weak var amazingSketchView: AmazingSketchView?
-    weak var mapPresentationViewController: UIViewController?
+    weak var presentationViewController: UIViewController?
 
     var lineColour: UIColor = UIColor.whiteColor()
     var saveCompletionHandler: AmazingSketchSaveCompletionHandler?
@@ -68,7 +68,19 @@ class AmazingSketchDrawingController: NSObject, UIScrollViewDelegate {
             print("SET!!")
         }
         
-        mapPresentationViewController?.presentViewController(navigationController, animated: true, completion: nil)
+        presentationViewController?.presentViewController(navigationController, animated: true, completion: nil)
+    }
+    
+    func jigsawPresentationHandler() {
+        let jigsawViewController = AmazingSketchJigsawViewController(nibName: String(AmazingSketchJigsawViewController), bundle: nil)
+        let navigationController = UINavigationController(rootViewController: jigsawViewController)
+        
+//        jigsawViewController.setHandler = { [unowned self] image in
+//            self.amazingSketchView?.updateBackgroundImage(image)
+//            print("SET!!")
+//        }
+        
+        presentationViewController?.presentViewController(navigationController, animated: true, completion: nil)
     }
     
     //MARK: scroll view delegate
