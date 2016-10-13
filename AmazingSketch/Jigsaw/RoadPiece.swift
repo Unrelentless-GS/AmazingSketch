@@ -21,7 +21,7 @@ enum JigsawSide {
     case East
     case West
     
-    static var allSides: [JigsawSide] {
+    static var allValues: [JigsawSide] {
         return [
             .North,
             .South,
@@ -30,12 +30,12 @@ enum JigsawSide {
     }
 }
 
-enum RoadPieceType {
-    case Intersection
-    case TJunction(orientation: JigsawOrientation)
-    case Straight(orientation: JigsawOrientation)
+enum RoadPieceType: Int {
+    case Intersection = 0
+    case TJunction
+    case Straight
     
-    var rawValue: String {
+    var imageName: String {
         switch self {
         case .Intersection:
             return "intersection"
@@ -47,14 +47,21 @@ enum RoadPieceType {
     }
     
     var image: UIImage? {
-        return UIImage(named: self.rawValue)
+        return UIImage(named: self.imageName)
+    }
+    
+    static var allValues: [RoadPieceType] {
+        return [
+            .Intersection,
+            .TJunction,
+            .Straight]
     }
 }
 
 struct RoadPiece {
     
     var orientation: JigsawOrientation
-    var connectedSides: Set<JigsawSide>
+    var connectedSides = Set<JigsawSide>()
     var roadPieceType: RoadPieceType
     
     var availableSides: [JigsawSide] {
@@ -63,10 +70,10 @@ struct RoadPiece {
         switch roadPieceType {
         case .Intersection:
             sides = intersectionSides()
-        case .TJunction(orientation: orientation):
+        case .TJunction:
             sides = tjunctionSides(orientation)
-        case .Straight(orientation: orientation):
-            sides = sraightSides(orientation)
+        case .Straight:
+            sides = straightSides(orientation)
         }
         
         return sides
@@ -74,13 +81,13 @@ struct RoadPiece {
     
     
     private func intersectionSides() -> [JigsawSide] {
-        let availableSides = Array(connectedSides.subtract(JigsawSide.allSides))
+        let availableSides = Array(connectedSides.subtract(JigsawSide.allValues))
         return availableSides
     }
     
     
     private func tjunctionSides(orientation: JigsawOrientation) -> [JigsawSide] {
-        let availableSides = connectedSides.intersect(JigsawSide.allSides)
+        let availableSides = connectedSides.intersect(JigsawSide.allValues)
         var allowedSides = [JigsawSide]()
         var availableAllowedSides = [JigsawSide]()
         
@@ -101,8 +108,8 @@ struct RoadPiece {
         
     }
     
-    private func sraightSides(orientation: JigsawOrientation) -> [JigsawSide] {
-        let availableSides = connectedSides.subtract(JigsawSide.allSides)
+    private func straightSides(orientation: JigsawOrientation) -> [JigsawSide] {
+        let availableSides = connectedSides.subtract(JigsawSide.allValues)
         var allowedSides = [JigsawSide]()
         var availableAllowedSides = [JigsawSide]()
         

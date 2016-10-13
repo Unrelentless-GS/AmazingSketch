@@ -8,13 +8,21 @@
 
 import UIKit
 
+typealias JigsawPieceHandler = (RoadPiece) -> ()
+
 class AmazingSketchJigsawViewController: UIViewController {
 
     var touchedPoint: CGPoint!
-    var jigsaw = Jigsaw()
+    var jigsaw: Jigsaw?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        jigsaw = Jigsaw { [unowned self] roadPiece in
+            let imageView = UIImageView(image: roadPiece.roadPieceType.image)
+            imageView.center = self.touchedPoint
+            self.view.addSubview(imageView)
+        }
         
         let longPressGesture = UILongPressGestureRecognizer()
         longPressGesture.minimumPressDuration = 1
@@ -29,7 +37,7 @@ class AmazingSketchJigsawViewController: UIViewController {
         touchedPoint = handler.locationInView(self.view)
         let rect = CGRectMake(touchedPoint.x, touchedPoint.y, 20, 20)
         
-        let piecePicker = JigsawPiecesViewController(nibName: String(JigsawPiecesViewController), bundle: nil)
+        let piecePicker = JigsawPiecesViewController(jigsaw: jigsaw!)
         piecePicker.modalPresentationStyle = .Popover
         
         piecePicker.popoverPresentationController?.permittedArrowDirections = .Any

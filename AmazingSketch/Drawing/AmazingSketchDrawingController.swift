@@ -72,7 +72,9 @@ class AmazingSketchDrawingController: NSObject, UIScrollViewDelegate {
     }
     
     func jigsawPresentationHandler() {
-        let jigsawViewController = AmazingSketchJigsawViewController(nibName: String(AmazingSketchJigsawViewController), bundle: nil)
+        let jigsawViewController = AmazingSketchJigsawViewController()
+        jigsawViewController.view.backgroundColor = UIColor.whiteColor()
+        
         let navigationController = UINavigationController(rootViewController: jigsawViewController)
         
 //        jigsawViewController.setHandler = { [unowned self] image in

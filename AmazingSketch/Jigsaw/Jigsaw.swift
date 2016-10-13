@@ -9,5 +9,17 @@
 import UIKit
 
 class Jigsaw {
-    var pieces = [RoadPiece]()
+    
+    var pieceUpdateHandler: JigsawPieceHandler
+    
+    init(handler: JigsawPieceHandler) {
+        pieceUpdateHandler = handler
+    }
+    
+    var pieces = [RoadPiece]() {
+        didSet {
+            guard let roadPiece = pieces.last else { return }
+            pieceUpdateHandler(roadPiece)
+        }
+    }
 }
