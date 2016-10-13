@@ -8,18 +8,6 @@
 
 import UIKit
 
-class Jigsaw {
-    
-    var pieceUpdateHandler: JigsawPieceHandler
-    
-    init(handler: JigsawPieceHandler) {
-        pieceUpdateHandler = handler
-    }
-    
-    var pieces = [RoadPiece]() {
-        didSet {
-            guard let roadPiece = pieces.last else { return }
-            pieceUpdateHandler(roadPiece)
-        }
-    }
+struct Jigsaw {
+    var pieces = [RoadPiece]()
 }

@@ -20,6 +20,8 @@
 		1226268C1DAEFC0F00FCFFEF /* JigsawPiecesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1226268A1DAEFC0F00FCFFEF /* JigsawPiecesViewController.swift */; };
 		122626901DAEFCF000FCFFEF /* JigsawPieceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1226268E1DAEFCF000FCFFEF /* JigsawPieceCollectionViewCell.swift */; };
 		122626911DAEFCF000FCFFEF /* JigsawPieceCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1226268F1DAEFCF000FCFFEF /* JigsawPieceCollectionViewCell.xib */; };
+		122626931DAF4E3100FCFFEF /* JigsawDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122626921DAF4E3100FCFFEF /* JigsawDefinitions.swift */; };
+		122626971DAF582F00FCFFEF /* JigsawPieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122626961DAF582F00FCFFEF /* JigsawPieceView.swift */; };
 		122795A51D6299940020C828 /* AmazingSketchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122795A41D6299940020C828 /* AmazingSketchView.swift */; };
 		1274ECDD1D5AF4AD0078B5EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1274ECDC1D5AF4AD0078B5EF /* AppDelegate.swift */; };
 		1274ECDF1D5AF4AD0078B5EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1274ECDE1D5AF4AD0078B5EF /* ViewController.swift */; };
@@ -43,6 +45,8 @@
 		1226268A1DAEFC0F00FCFFEF /* JigsawPiecesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JigsawPiecesViewController.swift; sourceTree = "<group>"; };
 		1226268E1DAEFCF000FCFFEF /* JigsawPieceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JigsawPieceCollectionViewCell.swift; sourceTree = "<group>"; };
 		1226268F1DAEFCF000FCFFEF /* JigsawPieceCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JigsawPieceCollectionViewCell.xib; sourceTree = "<group>"; };
+		122626921DAF4E3100FCFFEF /* JigsawDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JigsawDefinitions.swift; sourceTree = "<group>"; };
+		122626961DAF582F00FCFFEF /* JigsawPieceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JigsawPieceView.swift; sourceTree = "<group>"; };
 		122795A41D6299940020C828 /* AmazingSketchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazingSketchView.swift; sourceTree = "<group>"; };
 		1274ECD91D5AF4AD0078B5EF /* AmazingSketch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AmazingSketch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1274ECDC1D5AF4AD0078B5EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +96,8 @@
 				122626871DAEFAD500FCFFEF /* Jigsaw.swift */,
 				1226268E1DAEFCF000FCFFEF /* JigsawPieceCollectionViewCell.swift */,
 				1226268F1DAEFCF000FCFFEF /* JigsawPieceCollectionViewCell.xib */,
+				122626921DAF4E3100FCFFEF /* JigsawDefinitions.swift */,
+				122626961DAF582F00FCFFEF /* JigsawPieceView.swift */,
 			);
 			path = Jigsaw;
 			sourceTree = "<group>";
@@ -218,6 +224,7 @@
 				121FDE111D6AE43700694064 /* AmazingSketchDrawingController.swift in Sources */,
 				1226267E1DADD2B600FCFFEF /* AmazingSketchMapViewController.swift in Sources */,
 				122626881DAEFAD500FCFFEF /* Jigsaw.swift in Sources */,
+				122626931DAF4E3100FCFFEF /* JigsawDefinitions.swift in Sources */,
 				122626821DAEF9E500FCFFEF /* AmazingSketchJigsawViewController.swift in Sources */,
 				1274ECDF1D5AF4AD0078B5EF /* ViewController.swift in Sources */,
 				120957341D6BDD8600BC67A3 /* AmazingSketchExtensions.swift in Sources */,
@@ -225,6 +232,7 @@
 				12A9F09C1D669519001E084D /* AmazingSketchScrollView.swift in Sources */,
 				121FDE121D6AE43700694064 /* AmazingSketchStickerController.swift in Sources */,
 				122795A51D6299940020C828 /* AmazingSketchView.swift in Sources */,
+				122626971DAF582F00FCFFEF /* JigsawPieceView.swift in Sources */,
 				1226268C1DAEFC0F00FCFFEF /* JigsawPiecesViewController.swift in Sources */,
 				122626901DAEFCF000FCFFEF /* JigsawPieceCollectionViewCell.swift in Sources */,
 				121FDE101D6AE43700694064 /* AmazingSketchDrawingView.swift in Sources */,

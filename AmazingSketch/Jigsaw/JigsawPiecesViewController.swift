@@ -24,17 +24,13 @@ class JigsawPiecesViewController: UIViewController, UICollectionViewDelegate, UI
         return images
     }()
     
-    weak var jigsaw: Jigsaw?
-    
-    init(jigsaw: Jigsaw) {
-        self.jigsaw = jigsaw
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    var jigsaw: Jigsaw?
+    var dismissalBlock: JigsawDismissalBlock?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        jigsaw = Jigsaw()
         
         createCollectionView()
         
@@ -42,6 +38,11 @@ class JigsawPiecesViewController: UIViewController, UICollectionViewDelegate, UI
         collectionView.delegate = self
         
         collectionView.registerNib(UINib(nibName: String(JigsawPieceCollectionViewCell), bundle: nil), forCellWithReuseIdentifier: "cell")
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        dismissalBlock?(jigsaw)
     }
     
     private func createCollectionView() {
@@ -74,9 +75,8 @@ class JigsawPiecesViewController: UIViewController, UICollectionViewDelegate, UI
     //MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let piece = RoadPiece(orientation: .North,
-                              connectedSides: Set(),
-                              roadPieceType: RoadPieceType(rawValue: indexPath.row)!)
-        
+                              roadPieceType: RoadPieceType(rawValue: indexPath.row)!,
+                              connectedSides: Set())
         jigsaw?.pieces.append(piece)
         dismissViewControllerAnimated(true, completion: nil)
     }
