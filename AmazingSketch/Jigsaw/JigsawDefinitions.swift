@@ -8,10 +8,10 @@
 
 import UIKit
 
-enum JigsawOrientation {
+enum JigsawOrientation: Int {
     case North
-    case South
     case East
+    case South
     case West
 }
 
@@ -39,9 +39,9 @@ enum RoadPieceType: Int {
         switch self {
         case .Intersection:
             return "intersection"
-        case .TJunction(orientation: _):
+        case .TJunction:
             return "t-junction"
-        case .Straight(orientation: _):
+        case .Straight:
             return "straight"
         }
     }

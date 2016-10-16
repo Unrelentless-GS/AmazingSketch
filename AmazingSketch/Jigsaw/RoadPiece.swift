@@ -35,7 +35,6 @@ struct RoadPiece {
         return availableSides
     }
     
-    
     private func tjunctionSides(orientation: JigsawOrientation) -> [JigsawSide] {
         let availableSides = JigsawSide.allValues.subtract(connectedSides)
         var allowedSides = [JigsawSide]()

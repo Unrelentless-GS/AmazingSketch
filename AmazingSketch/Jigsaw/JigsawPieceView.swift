@@ -10,25 +10,65 @@ import UIKit
 
 class JigsawPieceView: UIView {
     
-    var imageView: UIImageView
+    lazy var imageView: UIImageView = { [unowned self] in
+        guard let imageToRotate = self.roadPiece.roadPieceType.image else { return UIImageView() }
+        var image = UIImage()
+        
+        switch self.roadPiece.orientation {
+        case .North:
+            image = UIImage(CGImage: imageToRotate.CGImage!,
+                            scale: 1.0,
+                            orientation: .Down)
+        case .South:
+            break
+        case .East:
+            image = UIImage(CGImage: imageToRotate.CGImage!,
+                            scale: 1.0,
+                            orientation: UIImageOrientation.Left)
+        case .West:
+            image = UIImage(CGImage: imageToRotate.CGImage!,
+                            scale: 1.0,
+                            orientation: UIImageOrientation.Right)
+        }
+        
+        return UIImageView(image: image)
+        }()
+    
     var roadPiece: RoadPiece
     
     init(roadPiece: RoadPiece) {
         let frame = CGRect(origin: CGPoint(x: 0, y: 0), size: (roadPiece.roadPieceType.image?.size)!)
         self.roadPiece = roadPiece
-        self.imageView = UIImageView(image: roadPiece.roadPieceType.image)
         
         super.init(frame: frame)
         
         self.createImageViewConstraints()
+        self.createGestureRecogniser()
     }
     
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
+    
+    @objc private func rotate() {
+        let currentOrientation = self.roadPiece.orientation
+        self.roadPiece.orientation = JigsawOrientation(rawValue: currentOrientation == .West ? 0 : currentOrientation.rawValue + 1)!
+        UIView.animateWithDuration(0.5, animations: {
+            self.transform = CGAffineTransformRotate(self.transform, CGFloat(M_PI_2)) // CGAffineTransformMakeRotation((90 * CGFloat(M_PI)) / 180.0)
+        }) { _ in
+            
+        }
+    }
+    
+    private func createGestureRecogniser() {
+        let rotateGesture = UITapGestureRecognizer(target: self, action: #selector(rotate))
+        rotateGesture.numberOfTapsRequired = 2
+        self.addGestureRecognizer(rotateGesture)
+    }
+    
     private func createImageViewConstraints() {
         self.imageView.translatesAutoresizingMaskIntoConstraints = false
         
-        self.addSubview(imageView)
+        self.addSubview(self.imageView)
         let horizontalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("H:|[image]|",
                                                                                   options: [],
                                                                                   metrics: nil,
@@ -44,8 +84,6 @@ class JigsawPieceView: UIView {
     
     private func createOverlays() {
         var layers = [CALayer]()
-        
-        print(self.frame, self.bounds, self.center)
         
         roadPiece.availableSides.forEach { [unowned self] side in
             let center = CGPoint(x: self.bounds.width / 2, y: self.bounds.height / 2)
