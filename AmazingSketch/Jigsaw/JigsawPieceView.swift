@@ -36,6 +36,8 @@ class JigsawPieceView: UIView {
     
     var roadPiece: RoadPiece
     
+    var overlays = [CALayer]()
+    
     init(roadPiece: RoadPiece) {
         let frame = CGRect(origin: CGPoint(x: 0, y: 0), size: (roadPiece.roadPieceType.image?.size)!)
         self.roadPiece = roadPiece
@@ -52,10 +54,13 @@ class JigsawPieceView: UIView {
     @objc private func rotate(gesture: UITapGestureRecognizer) {
         let currentOrientation = self.roadPiece.orientation
         self.roadPiece.orientation = JigsawOrientation(rawValue: currentOrientation == .West ? 0 : currentOrientation.rawValue + 1)!
+        
         UIView.animateWithDuration(0.5, animations: {
-            self.transform = CGAffineTransformRotate(self.transform, CGFloat(M_PI_2)) // CGAffineTransformMakeRotation((90 * CGFloat(M_PI)) / 180.0)
-        }) { _ in
+            self.removeOverlays()
+            self.imageView.transform = CGAffineTransformRotate(self.imageView.transform, CGFloat(M_PI_2))
             
+        }) { [unowned self] _ in
+            self.createOverlays()
         }
     }
     
@@ -140,12 +145,12 @@ class JigsawPieceView: UIView {
                 height = lineLength
             case .East:
                 y = center.y
-                x = self.bounds.origin.x - lineLength
+                x = self.bounds.size.width
                 width = lineLength
                 height = lineThickness
             case .West:
                 y = center.y
-                x = self.bounds.size.width
+                x = self.bounds.origin.x - lineLength
                 width = lineLength
                 height = lineThickness
             }
@@ -158,7 +163,15 @@ class JigsawPieceView: UIView {
             
             layers.append(layer)
             self.layer.addSublayer(layer)
+            self.overlays.append(layer)
         }
+    }
+    
+    private func removeOverlays() {
+        for overlay in overlays {
+            overlay.removeFromSuperlayer()
+        }
+        overlays.removeAll()
     }
     
     override func layoutSubviews() {
