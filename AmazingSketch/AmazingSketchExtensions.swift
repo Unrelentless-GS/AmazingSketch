@@ -55,3 +55,9 @@ extension UIImage {
         return scaledImage
     }
 }
+
+extension UISwipeGestureRecognizerDirection: Hashable {
+    public var hashValue: Int {
+        return Int(rawValue)
+    }
+}

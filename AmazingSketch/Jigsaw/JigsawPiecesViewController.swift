@@ -25,12 +25,21 @@ class JigsawPiecesViewController: UIViewController, UICollectionViewDelegate, UI
     }()
     
     var jigsaw: Jigsaw?
+    var direction: UISwipeGestureRecognizerDirection?
+    var coordinate: JigsawCoordinate?
     var dismissalBlock: JigsawDismissalBlock?
+    
+    convenience init(jigsaw: Jigsaw?, direction: UISwipeGestureRecognizerDirection?, fromCoordinate coordinate: JigsawCoordinate?) {
+        self.init()
+        self.jigsaw = jigsaw
+        self.direction = direction
+        self.coordinate = coordinate
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        jigsaw = Jigsaw()
+        if jigsaw == nil { jigsaw = Jigsaw() }
         
         createCollectionView()
         
@@ -42,7 +51,6 @@ class JigsawPiecesViewController: UIViewController, UICollectionViewDelegate, UI
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        dismissalBlock?(jigsaw)
     }
     
     private func createCollectionView() {
@@ -74,10 +82,30 @@ class JigsawPiecesViewController: UIViewController, UICollectionViewDelegate, UI
     
     //MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let piece = RoadPiece(orientation: .North,
-                              roadPieceType: RoadPieceType(rawValue: indexPath.row)!,
-                              connectedSides: Set())
-        jigsaw?.pieces.append(piece)
+
+        var piece: RoadPiece
+        
+        if jigsaw?.pieces.count == 0 {
+            let coordinate = JigsawCoordinate(x: 0, y: 0)
+            piece = RoadPiece(orientation: .North,
+                                  roadPieceType: RoadPieceType(rawValue: indexPath.row)!,
+                                  connectedSides: Set())
+            jigsaw?.pieces[coordinate] = piece
+        } else {
+            let connectedSide = JigsawSide.swipeGestureMap[direction!]
+            
+            let y = direction! == .Left || direction! == .Right ? self.coordinate!.y : direction! == .Up ? self.coordinate!.y + 1 : self.coordinate!.y - 1
+            let x = direction! == .Up || direction! == .Down ? self.coordinate!.x : direction! == .Right ? self.coordinate!.x + 1 : self.coordinate!.x - 1
+            
+            let coordinate = JigsawCoordinate(x: x, y: y)
+            piece = RoadPiece(orientation: .North,
+                                  roadPieceType: RoadPieceType(rawValue: indexPath.row)!,
+                                  connectedSides: Set<JigsawSide>(arrayLiteral: connectedSide!))
+            jigsaw?.pieces[coordinate] = piece
+        }
+        
+        dismissalBlock?(jigsaw, piece)
+
         dismissViewControllerAnimated(true, completion: nil)
     }
     

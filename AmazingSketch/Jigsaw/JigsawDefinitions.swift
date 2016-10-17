@@ -26,7 +26,17 @@ enum JigsawSide {
             .North,
             .South,
             .East,
-            .West]
+            .West
+        ]
+    }
+    
+    static var swipeGestureMap: [UISwipeGestureRecognizerDirection: JigsawSide] {
+        return [
+            .Right : .West,
+            .Left : .East,
+            .Up : .South,
+            .Down : .North
+        ]
     }
 }
 
@@ -59,4 +69,4 @@ enum RoadPieceType: Int {
 }
 
 typealias JigsawPieceHandler = (RoadPiece) -> ()
-typealias JigsawDismissalBlock = (Jigsaw?) -> ()
+typealias JigsawDismissalBlock = (Jigsaw?, RoadPiece?) -> ()

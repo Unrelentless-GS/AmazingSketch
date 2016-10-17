@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol JigsawPieceViewDelegate {
+    func jigsawPieceView(jigsawPieceView: JigsawPieceView ,swipedWithDirection: UISwipeGestureRecognizerDirection)
+}
+
 class JigsawPieceView: UIView {
     
     lazy var imageView: UIImageView = { [unowned self] in
@@ -35,12 +39,14 @@ class JigsawPieceView: UIView {
         }()
     
     var roadPiece: RoadPiece
+    var delegate: JigsawPieceViewDelegate?
     
-    var overlays = [CALayer]()
+    private var overlays = [CALayer]()
     
-    init(roadPiece: RoadPiece) {
+    init(roadPiece: RoadPiece, delegate: JigsawPieceViewDelegate) {
         let frame = CGRect(origin: CGPoint(x: 0, y: 0), size: (roadPiece.roadPieceType.image?.size)!)
         self.roadPiece = roadPiece
+        self.delegate = delegate
         
         super.init(frame: frame)
         
@@ -70,23 +76,16 @@ class JigsawPieceView: UIView {
         switch gesture.direction {
         case UISwipeGestureRecognizerDirection.Right:
             guard allowedDirections.contains(.East) else { return }
-            print("ADD HERE PLZ")
-            
         case UISwipeGestureRecognizerDirection.Left:
             guard allowedDirections.contains(.West) else { return }
-            print("ADD HERE PLZ")
-
         case UISwipeGestureRecognizerDirection.Up:
             guard allowedDirections.contains(.North) else { return }
-            print("ADD HERE PLZ")
-
         case UISwipeGestureRecognizerDirection.Down:
             guard allowedDirections.contains(.South) else { return }
-            print("ADD HERE PLZ")
-
         default:
             break
         }
+        delegate?.jigsawPieceView(self, swipedWithDirection: gesture.direction)
     }
     
     private func createGestureRecogniser() {
