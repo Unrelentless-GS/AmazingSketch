@@ -10,6 +10,7 @@ import UIKit
 
 class AmazingSketchJigsawViewController: UIViewController, JigsawPieceViewDelegate {
     
+    var hasJigsaw = false
     var touchedPoint: CGPoint!
     var jigsaw = Jigsaw()
     
@@ -25,6 +26,7 @@ class AmazingSketchJigsawViewController: UIViewController, JigsawPieceViewDelega
     
     @objc private func longPressHandler(handler: UILongPressGestureRecognizer) {
         guard self.presentedViewController == nil else { return }
+        guard self.hasJigsaw == false else { return }
         
         touchedPoint = handler.locationInView(self.view)
         let rect = CGRect(x: touchedPoint.x, y: touchedPoint.y, width: 20, height: 20)
@@ -40,6 +42,7 @@ class AmazingSketchJigsawViewController: UIViewController, JigsawPieceViewDelega
             let jigsawPiece = JigsawPieceView(roadPiece: roadPiece, delegate: self)
             jigsawPiece.center = self.touchedPoint
             self.view.addSubview(jigsawPiece)
+            self.hasJigsaw = true
         }
         
         piecePicker.popoverPresentationController?.permittedArrowDirections = .Any
@@ -52,7 +55,6 @@ class AmazingSketchJigsawViewController: UIViewController, JigsawPieceViewDelega
     //MARK: JigsawPieceViewDelegate
     func jigsawPieceView(jigsawPieceView: JigsawPieceView, swipedWithDirection direction: UISwipeGestureRecognizerDirection) {
         let coordinate = jigsaw.pieces.filter{$0.1 == jigsawPieceView.roadPiece}.first?.0
-        
         let piecePickerViewController = JigsawPiecesViewController(jigsaw: jigsaw, direction: direction, fromCoordinate: coordinate)
         
         piecePickerViewController.dismissalBlock = { [unowned self, jigsawPieceView, direction] newJigsaw, piece in
@@ -61,13 +63,8 @@ class AmazingSketchJigsawViewController: UIViewController, JigsawPieceViewDelega
             let x = direction == .Down || direction == .Up ? jigsawPieceView.center.x : jigsawPieceView.center.x + (direction == .Right ? jigsawPieceView.frame.height : (-jigsawPieceView.frame.width))
             let y = direction == .Right || direction == .Left ? jigsawPieceView.center.y : jigsawPieceView.center.y + (direction == .Down ? jigsawPieceView.frame.height : (-jigsawPieceView.frame.height))
             
-            //            let connectedDirection = JigsawSide.swipeGestureMap[direction]
-            
             let jigsawPiece = JigsawPieceView(roadPiece: roadPiece, delegate: self)
             jigsawPiece.center = CGPoint(x: x, y: y)
-            //            if let connectedDirection = connectedDirection {
-            //                jigsawPiece.roadPiece.connectedSides.insert(connectedDirection)
-            //            }
             self.view.addSubview(jigsawPiece)
             
             self.jigsaw = newJigsaw!

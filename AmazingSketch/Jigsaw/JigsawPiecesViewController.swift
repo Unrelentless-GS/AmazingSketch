@@ -59,7 +59,7 @@ class JigsawPiecesViewController: UIViewController, UICollectionViewDelegate, UI
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(collectionView)
-
+        
         let horizConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[collectionView]|",
                                                                               options: [],
                                                                               metrics: nil,
@@ -82,14 +82,14 @@ class JigsawPiecesViewController: UIViewController, UICollectionViewDelegate, UI
     
     //MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-
         var piece: RoadPiece
         
         if jigsaw?.pieces.count == 0 {
             let coordinate = JigsawCoordinate(x: 0, y: 0)
             piece = RoadPiece(orientation: .North,
-                                  roadPieceType: RoadPieceType(rawValue: indexPath.row)!,
-                                  connectedSides: Set())
+                              roadPieceType: RoadPieceType(rawValue: indexPath.row)!,
+                              connectedSides: Set(),
+                              coordinate: coordinate)
             jigsaw?.pieces[coordinate] = piece
         } else {
             let connectedSide = JigsawSide.swipeGestureMap[direction!]
@@ -99,13 +99,14 @@ class JigsawPiecesViewController: UIViewController, UICollectionViewDelegate, UI
             
             let coordinate = JigsawCoordinate(x: x, y: y)
             piece = RoadPiece(orientation: .North,
-                                  roadPieceType: RoadPieceType(rawValue: indexPath.row)!,
-                                  connectedSides: Set<JigsawSide>(arrayLiteral: connectedSide!))
+                              roadPieceType: RoadPieceType(rawValue: indexPath.row)!,
+                              connectedSides: Set<JigsawSide>(arrayLiteral: connectedSide!),
+                              coordinate: coordinate)
             jigsaw?.pieces[coordinate] = piece
         }
         
         dismissalBlock?(jigsaw, piece)
-
+        
         dismissViewControllerAnimated(true, completion: nil)
     }
     

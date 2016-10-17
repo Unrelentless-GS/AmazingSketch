@@ -12,9 +12,10 @@ struct RoadPiece: Equatable {
     
     var orientation: JigsawOrientation
     var roadPieceType: RoadPieceType
-    
+
     var connectedSides = Set<JigsawSide>()
-    
+    var coordinate: JigsawCoordinate
+
     var availableSides: [JigsawSide] {
         var sides = [JigsawSide]()
         
@@ -75,8 +76,5 @@ struct RoadPiece: Equatable {
 }
 
 func ==(lhs: RoadPiece, rhs: RoadPiece) -> Bool {
-    return lhs.roadPieceType == rhs.roadPieceType &&
-        lhs.availableSides == rhs.availableSides &&
-        lhs.connectedSides == rhs.connectedSides &&
-        lhs.orientation == rhs.orientation
+    return lhs.coordinate == rhs.coordinate
 }
