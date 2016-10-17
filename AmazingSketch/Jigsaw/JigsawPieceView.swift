@@ -49,7 +49,7 @@ class JigsawPieceView: UIView {
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
     
-    @objc private func rotate() {
+    @objc private func rotate(gesture: UITapGestureRecognizer) {
         let currentOrientation = self.roadPiece.orientation
         self.roadPiece.orientation = JigsawOrientation(rawValue: currentOrientation == .West ? 0 : currentOrientation.rawValue + 1)!
         UIView.animateWithDuration(0.5, animations: {
@@ -59,10 +59,42 @@ class JigsawPieceView: UIView {
         }
     }
     
+    @objc private func swipe(gesture: UISwipeGestureRecognizer) {
+        let allowedDirections = self.roadPiece.availableSides
+        
+        switch gesture.direction {
+        case UISwipeGestureRecognizerDirection.Right:
+            guard allowedDirections.contains(.East) else { return }
+            print("ADD HERE PLZ")
+            
+        case UISwipeGestureRecognizerDirection.Left:
+            guard allowedDirections.contains(.West) else { return }
+            print("ADD HERE PLZ")
+
+        case UISwipeGestureRecognizerDirection.Up:
+            guard allowedDirections.contains(.North) else { return }
+            print("ADD HERE PLZ")
+
+        case UISwipeGestureRecognizerDirection.Down:
+            guard allowedDirections.contains(.South) else { return }
+            print("ADD HERE PLZ")
+
+        default:
+            break
+        }
+    }
+    
     private func createGestureRecogniser() {
         let rotateGesture = UITapGestureRecognizer(target: self, action: #selector(rotate))
         rotateGesture.numberOfTapsRequired = 2
         self.addGestureRecognizer(rotateGesture)
+
+        let directions: [UISwipeGestureRecognizerDirection] = [.Right, .Left, .Up, .Down]
+        for direction in directions {
+            let gesture = UISwipeGestureRecognizer(target: self, action: #selector(swipe))
+            gesture.direction = direction
+            self.addGestureRecognizer(gesture)
+        }
     }
     
     private func createImageViewConstraints() {
