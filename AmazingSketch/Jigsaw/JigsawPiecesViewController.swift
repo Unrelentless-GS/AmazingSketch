@@ -80,6 +80,34 @@ class JigsawPiecesViewController: UIViewController, UICollectionViewDelegate, UI
         return layout
     }
     
+    private func connectedSides(ofCoordinate coordinate: JigsawCoordinate) -> Set<JigsawSide> {
+        
+        let upPiece = jigsaw?.pieces.filter{$0.0.y == coordinate.y + 1 && $0.0.x == coordinate.x}.first
+        let downPiece = jigsaw?.pieces.filter{$0.0.y == coordinate.y - 1 && $0.0.x == coordinate.x}.first
+        let leftPiece = jigsaw?.pieces.filter{$0.0.x == coordinate.x - 1 && $0.0.y == coordinate.y}.first
+        let rightPiece = jigsaw?.pieces.filter{$0.0.x == coordinate.x + 1 && $0.0.y == coordinate.y}.first
+        
+        var connectedSides = Set<JigsawSide>()
+        
+        if upPiece != nil {
+            connectedSides.insert(.North)
+        }
+        
+        if downPiece != nil {
+            connectedSides.insert(.South)
+        }
+        
+        if leftPiece != nil {
+            connectedSides.insert(.West)
+        }
+        
+        if rightPiece != nil {
+            connectedSides.insert(.East)
+        }
+        
+        return connectedSides
+    }
+    
     //MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         var piece: RoadPiece
@@ -92,15 +120,13 @@ class JigsawPiecesViewController: UIViewController, UICollectionViewDelegate, UI
                               coordinate: coordinate)
             jigsaw?.pieces[coordinate] = piece
         } else {
-            let connectedSide = JigsawSide.swipeGestureMap[direction!]
-            
             let y = direction! == .Left || direction! == .Right ? self.coordinate!.y : direction! == .Up ? self.coordinate!.y + 1 : self.coordinate!.y - 1
             let x = direction! == .Up || direction! == .Down ? self.coordinate!.x : direction! == .Right ? self.coordinate!.x + 1 : self.coordinate!.x - 1
             
             let coordinate = JigsawCoordinate(x: x, y: y)
             piece = RoadPiece(orientation: .North,
                               roadPieceType: RoadPieceType(rawValue: indexPath.row)!,
-                              connectedSides: Set<JigsawSide>(arrayLiteral: connectedSide!),
+                              connectedSides: self.connectedSides(ofCoordinate: coordinate),
                               coordinate: coordinate)
             jigsaw?.pieces[coordinate] = piece
         }

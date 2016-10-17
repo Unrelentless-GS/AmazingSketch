@@ -9,7 +9,7 @@
 import UIKit
 
 struct Jigsaw: Equatable {
-    var pieces = [JigsawCoordinate:RoadPiece]()
+    var pieces = [JigsawCoordinate: RoadPiece]()
 }
 
 struct JigsawCoordinate: Hashable {

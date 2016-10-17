@@ -68,6 +68,7 @@ class AmazingSketchJigsawViewController: UIViewController, JigsawPieceViewDelega
             self.view.addSubview(jigsawPiece)
             
             self.jigsaw = newJigsaw!
+            self.updateJigsaw(withPiece: roadPiece)
         }
         
         piecePickerViewController.modalPresentationStyle = .Popover
@@ -75,6 +76,41 @@ class AmazingSketchJigsawViewController: UIViewController, JigsawPieceViewDelega
         piecePickerViewController.popoverPresentationController?.sourceRect = jigsawPieceView.frame
         piecePickerViewController.popoverPresentationController?.sourceView = self.view
         
-        self.presentViewController(piecePickerViewController, animated: true, completion: nil)    }
+        self.presentViewController(piecePickerViewController, animated: true, completion: nil)
+    }
     
+    private func updateJigsaw(withPiece roadPiece: RoadPiece) {
+        let coordinate = roadPiece.coordinate
+        
+        let upPiece = jigsaw.pieces.filter{$0.0.y == coordinate.y + 1 && $0.0.x == coordinate.x}.first
+        let downPiece = jigsaw.pieces.filter{$0.0.y == coordinate.y - 1 && $0.0.x == coordinate.x}.first
+        let leftPiece = jigsaw.pieces.filter{$0.0.x == coordinate.x - 1 && $0.0.y == coordinate.y}.first
+        let rightPiece = jigsaw.pieces.filter{$0.0.x == coordinate.x + 1 && $0.0.y == coordinate.y}.first
+        
+        if let upPiece = upPiece {
+            var newPiece = upPiece.1
+            newPiece.connectedSides.unionInPlace([.South])
+            jigsaw.pieces[upPiece.0] = newPiece
+        }
+        
+        if let downPiece = downPiece {
+            var newPiece = downPiece.1
+            newPiece.connectedSides.unionInPlace([.North])
+            jigsaw.pieces[downPiece.0] = newPiece
+        }
+        
+        if let leftPiece = leftPiece {
+            var newPiece = leftPiece.1
+            newPiece.connectedSides.unionInPlace([.East])
+            jigsaw.pieces[leftPiece.0] = newPiece
+            
+        }
+        
+        if let rightPiece = rightPiece {
+            var newPiece = rightPiece.1
+            newPiece.connectedSides.unionInPlace([.West])
+            jigsaw.pieces[rightPiece.0] = newPiece
+            
+        }
+    }
 }
