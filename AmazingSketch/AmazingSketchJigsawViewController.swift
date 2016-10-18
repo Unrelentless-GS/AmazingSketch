@@ -10,9 +10,11 @@ import UIKit
 
 class AmazingSketchJigsawViewController: UIViewController, JigsawPieceViewDelegate {
     
+    var setHandler: AmazingSketchSetHandler?
     var hasJigsaw = false
     var touchedPoint: CGPoint!
     var jigsaw = Jigsaw()
+    var jigsawPieces = [JigsawPieceView]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +24,30 @@ class AmazingSketchJigsawViewController: UIViewController, JigsawPieceViewDelega
         longPressGesture.addTarget(self, action: #selector(longPressHandler(_:)))
         
         self.view?.addGestureRecognizer(longPressGesture)
+        
+        let setButton = UIBarButtonItem(title: "Set", style: .Plain, target: self, action: #selector(jigsawSetHandler))
+        let dismissButton = UIBarButtonItem(title: "Dismiss", style: .Plain, target: self, action: #selector(dismissHandler))
+        
+        self.navigationItem.rightBarButtonItems = [setButton]
+        self.navigationItem.leftBarButtonItems = [dismissButton]
+    }
+    
+    
+    //MARK: map callbakcs
+    
+    @objc private func jigsawSetHandler(button: UIBarButtonItem) {
+        
+        jigsawPieces.forEach{$0.removeOverlays()}
+        
+        if let image = self.view.renderToImage() {
+            setHandler?(image: image)
+        }
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @objc private func dismissHandler(button: UIBarButtonItem) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @objc private func longPressHandler(handler: UILongPressGestureRecognizer) {
@@ -42,6 +68,7 @@ class AmazingSketchJigsawViewController: UIViewController, JigsawPieceViewDelega
             let jigsawPiece = JigsawPieceView(roadPiece: roadPiece, delegate: self)
             jigsawPiece.center = self.touchedPoint
             self.view.addSubview(jigsawPiece)
+            self.jigsawPieces.append(jigsawPiece)
             self.hasJigsaw = true
         }
         
@@ -68,6 +95,7 @@ class AmazingSketchJigsawViewController: UIViewController, JigsawPieceViewDelega
             self.view.addSubview(jigsawPiece)
             
             self.jigsaw = newJigsaw!
+            self.jigsawPieces.append(jigsawPiece)
             self.updateJigsaw(withPiece: roadPiece)
         }
         
@@ -91,26 +119,36 @@ class AmazingSketchJigsawViewController: UIViewController, JigsawPieceViewDelega
             var newPiece = upPiece.1
             newPiece.connectedSides.unionInPlace([.South])
             jigsaw.pieces[upPiece.0] = newPiece
+            updateViewsWith(newPiece)
         }
         
         if let downPiece = downPiece {
             var newPiece = downPiece.1
             newPiece.connectedSides.unionInPlace([.North])
             jigsaw.pieces[downPiece.0] = newPiece
+            updateViewsWith(newPiece)
         }
         
         if let leftPiece = leftPiece {
             var newPiece = leftPiece.1
             newPiece.connectedSides.unionInPlace([.East])
             jigsaw.pieces[leftPiece.0] = newPiece
-            
+            updateViewsWith(newPiece)
         }
         
         if let rightPiece = rightPiece {
             var newPiece = rightPiece.1
             newPiece.connectedSides.unionInPlace([.West])
             jigsaw.pieces[rightPiece.0] = newPiece
-            
+            updateViewsWith(newPiece)
         }
+    }
+    
+    private func updateViewsWith(newPiece: RoadPiece) {
+        let jigsawPieceView = jigsawPieces.filter{$0.roadPiece.coordinate == newPiece.coordinate}.first
+        let index = jigsawPieces.indexOf(jigsawPieceView!)
+        
+        jigsawPieceView?.roadPiece = newPiece
+        jigsawPieces[index!] = jigsawPieceView!
     }
 }

@@ -17,7 +17,7 @@ struct JigsawCoordinate: Hashable {
     var y: Int
 
     var hashValue: Int {
-        let hashAttempt = x.hashValue + y.hashValue
+        let hashAttempt = "\(x)\(y)".hashValue
         return hashAttempt
     }
 }

@@ -7,7 +7,7 @@
 //
 
 typealias AmazingSketchSaveCompletionHandler = () -> ()
-typealias AmazingSketchMapSetHandler = (mapImage: UIImage) -> ()
+typealias AmazingSketchSetHandler = (image: UIImage) -> ()
 
 import UIKit
 
@@ -65,7 +65,6 @@ class AmazingSketchDrawingController: NSObject, UIScrollViewDelegate {
         
         mapViewController.setHandler = { [unowned self] image in
             self.amazingSketchView?.updateBackgroundImage(image)
-            print("SET!!")
         }
         
         presentationViewController?.presentViewController(navigationController, animated: true, completion: nil)
@@ -77,10 +76,9 @@ class AmazingSketchDrawingController: NSObject, UIScrollViewDelegate {
         
         let navigationController = UINavigationController(rootViewController: jigsawViewController)
         
-//        jigsawViewController.setHandler = { [unowned self] image in
-//            self.amazingSketchView?.updateBackgroundImage(image)
-//            print("SET!!")
-//        }
+        jigsawViewController.setHandler = { [unowned self] image in
+            self.amazingSketchView?.updateBackgroundImage(image)
+        }
         
         presentationViewController?.presentViewController(navigationController, animated: true, completion: nil)
     }

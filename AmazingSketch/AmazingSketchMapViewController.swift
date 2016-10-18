@@ -13,7 +13,7 @@ class AmazingSketchMapViewController: UIViewController, MKMapViewDelegate, CLLoc
 
     @IBOutlet weak var mapView: MKMapView!
     
-    var setHandler: AmazingSketchMapSetHandler?
+    var setHandler: AmazingSketchSetHandler?
     
     private var locationManager = CLLocationManager()
     private var firstRender = true
@@ -41,7 +41,7 @@ class AmazingSketchMapViewController: UIViewController, MKMapViewDelegate, CLLoc
     
     @objc private func mapDoneHandler(button: UIBarButtonItem) {
         if let image = mapView.renderToImage() {
-            setHandler?(mapImage: image)
+            setHandler?(image: image)
         }
 
         self.dismissViewControllerAnimated(true, completion: nil)

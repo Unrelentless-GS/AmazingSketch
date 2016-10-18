@@ -55,8 +55,16 @@ class JigsawPieceView: UIView {
     }
     
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
+    func removeOverlays() {
+        for overlay in overlays {
+            overlay.removeFromSuperlayer()
+        }
+        overlays.removeAll()
+    }
+
     
-    
+    //MARK: private
     @objc private func rotate(gesture: UITapGestureRecognizer) {
         let currentOrientation = self.roadPiece.orientation
         self.roadPiece.orientation = JigsawOrientation(rawValue: currentOrientation == .West ? 0 : currentOrientation.rawValue + 1)!
@@ -164,13 +172,6 @@ class JigsawPieceView: UIView {
             self.layer.addSublayer(layer)
             self.overlays.append(layer)
         }
-    }
-    
-    private func removeOverlays() {
-        for overlay in overlays {
-            overlay.removeFromSuperlayer()
-        }
-        overlays.removeAll()
     }
     
     override func layoutSubviews() {
